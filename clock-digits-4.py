@@ -120,8 +120,8 @@ def update_screen():
     dch = 26 * scale_factor  # digit center height
     lm = 10  * scale_factor  # left margin for all 4-digits
     dw = (2 * dr) + 4  # digit width (2*dr + spacing between digits)
-    cm = 8  * scale_factor # colon left margin  # FIXME needs work
-    width = 3 * scale_factor
+    cm = 8  * scale_factor # colon left margin
+    width = 3 * scale_factor  # TODO review, can this be thicker? Needs offsets to be updated if changed
     
     # draw the hour digits
     hour = localtime()[3]
@@ -135,6 +135,8 @@ def update_screen():
         # just draw the second digit
         drawDigit(hour, lm+dw, dch, dr, width)
     else:
+        # TODO 24-hour support
+        # FIXME with scale_factor != 1, this does not work well and looks ugly
         # we have 10, 11 or 12 so the first digit is 1
         drawDigit(1, lm, dch, dr, width)
         # subtract 10 from the second digit
