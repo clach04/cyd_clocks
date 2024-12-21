@@ -192,7 +192,7 @@ def update_screen():
     # draw the AM/PM
     display.text(am_pm, lm+dw*4+cm-8, dch+3, 1)  # TODO location (at-all? Use 24-hour)
 
-    display.text('%02d' % localtime()[5], 0, 54)  # TODO location  - seconds
+    display.text('%02d' % localtime()[5], lm+dw*4+cm-8, dch+3+2*8)  # seconds
 
     previous_hour = hour
     previous_minutes = minutes
