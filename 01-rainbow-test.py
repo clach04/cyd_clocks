@@ -29,7 +29,10 @@ backlight = machine.Pin(21, machine.Pin.OUT)
 backlight_pwm = machine.PWM(backlight)
 #backlight.on()  # TODO review PWM instead of on/off
 #backlight_pwm.duty(1023)  # 100%
-backlight_pwm.duty(512)  # 50%
+#backlight_pwm.duty(512)  # 50%
+backlight_percentage = 50
+backlight_pwm.duty(int(backlight_percentage * 10.23))  # 1023 / 100
+
 
 RED = color565(255,0,0)
 ORANGE = color565(255,128,0)
