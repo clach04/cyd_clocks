@@ -114,7 +114,6 @@ def drawDigit(digit, x, y, size, width):  # FIXME does not clear existing digit 
 
 def update_screen():
     #display.fill(0)  # TODO?
-    display.text('Clock Digit Lab', 0, 0, 1)
     dr = 10 # digit radius
     dch = 26 # digit center hight
     lm = 10 # left margin for all 4-digits
@@ -124,6 +123,7 @@ def update_screen():
     
     # draw the hour digits
     hour = localtime()[3]
+    # FIXME 24-hour option
     if hour > 12:
         hour = hour - 12
         am_pm = 'pm'
@@ -151,10 +151,9 @@ def update_screen():
     drawDigit(minutes % 10, lm+dw*3+cm+2, dch, dr, width)
     
     # draw the AM/PM
-    display.text(am_pm, lm+dw*4+cm-8, dch+3, 1)
+    display.text(am_pm, lm+dw*4+cm-8, dch+3, 1)  # TODO location (at-all? Use 24-hour)
     
-    #display.text(timeStrFmt(), 0, 46, 1)
-    display.text('%02d' % localtime()[5], 0, 54)
+    display.text('%02d' % localtime()[5], 0, 54)  # TODO location
 
     #display.show()  # TODO needed?
 
