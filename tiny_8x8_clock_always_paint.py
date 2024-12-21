@@ -57,7 +57,9 @@ def display_clock():
     while True:
         l = local_time_tuple_function()
         time_str = '%02d:%02d:%02d' % (l[3], l[4], l[5])
+        date_str = '%04d-%02d-%02d' % (l[0], l[1], l[2])  # with this present BUT not the display, ~420 fps (down from ~450 without)
         display.draw_text8x8(x, y, time_str, fg_color, bg_color)
+        display.draw_text8x8(0, fps_y, date_str, COLOR_WHITE, COLOR_BLACK)  # with this present, ~237 fps (down from ~450 without)
 
         # simple FPS math. Consider implementing a clone of pygame.time.Clock() which has a tick()/get_fps() interface https://www.pygame.org/docs/ref/time.html#pygame.time.Clock.get_fps - below is probably faster?
         # Also see lvgl macro define LV_USE_PERF_MONITOR
