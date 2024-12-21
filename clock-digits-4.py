@@ -126,7 +126,13 @@ def drawDigit(digit, x, y, size, width):  # FIXME does not clear existing digit 
       # display.line(xpos, startY, xpos, endY, 1)
       drawThickVertLine(startY, endY, xpos, width)
 
+previous_hour = -1
+previous_minutes = -1
+
 def update_screen():
+    global previous_hour
+    global previous_minutes
+
     #display.fill(0)  # TODO?
     # Scale factor of 4 is too large for 24-hour format display
     scale_factor = 3
@@ -145,16 +151,18 @@ def update_screen():
         am_pm = 'pm'
     else:
         am_pm = 'am'
-    if hour < 10:
-        # just draw the second digit
-        drawDigit(hour, lm+dw, dch, dr, width)
-    else:
-        # TODO 24-hour support
-        # FIXME with scale_factor != 1, this does not work well and looks ugly
-        # we have 10, 11 or 12 so the first digit is 1
-        drawDigit(1, lm, dch, dr, width)
-        # subtract 10 from the second digit
-        drawDigit(hour - 10, lm + dw, dch, dr, width)
+    if previous_hour != hour:
+        if hour < 10:
+            # just draw the second digit
+            display.fill_rectangle(lm + dw - cm - 4 - (int(width / 2)), dch - (12 * scale_factor), dw + 1, dch, color565(0, 0, 255))  # or what ever should be under number...
+            drawDigit(hour, lm+dw, dch, dr, width)
+        else:
+            # TODO 24-hour support
+            # FIXME with scale_factor != 1, this does not work well and looks ugly
+            # we have 10, 11 or 12 so the first digit is 1
+            drawDigit(1, lm, dch, dr, width)
+            # subtract 10 from the second digit
+            drawDigit(hour - 10, lm + dw, dch, dr, width)
        
     # draw the colon
     if localtime()[5] % 2:
@@ -162,16 +170,24 @@ def update_screen():
     
     # draw the minutes
     minutes = localtime()[4]
-    # value, x, y, size
-    # left minute digit after the colon
-    drawDigit(minutes // 10, lm + dw * 2 +cm, dch, dr, width)
-    # right minute digit
-    drawDigit(minutes % 10, lm + dw * 3 + cm + (2 * scale_factor), dch, dr, width)
-    
+    if previous_minutes != minutes:
+        #display.fill_rectangle(x, y, w, h, color565(0, 0, 0))  # or what ever should be under number...
+        #display.fill_rectangle(lm + dw * 2 +cm, dch, dw, dch, color565(255, 0, 0))  # or what ever should be under number...
+        display.fill_rectangle(lm + dw * 2 - 4 - (int(width / 2)), dch - (12 * scale_factor), dw + 1, dch, color565(255, 0, 0))  # or what ever should be under number...
+        # value, x, y, size
+        # left minute digit after the colon
+        drawDigit(minutes // 10, lm + dw * 2 +cm, dch, dr, width)
+        # right minute digit
+        display.fill_rectangle(lm + dw * 3 - (int(width / 2)), dch - (12 * scale_factor), dw + 4, dch, color565(0, 255, 0))  # or what ever should be under number...
+        drawDigit(minutes % 10, lm + dw * 3 + cm + (2 * scale_factor), dch, dr, width)
+
     # draw the AM/PM
     display.text(am_pm, lm+dw*4+cm-8, dch+3, 1)  # TODO location (at-all? Use 24-hour)
-    
-    display.text('%02d' % localtime()[5], 0, 54)  # TODO location
+
+    display.text('%02d' % localtime()[5], 0, 54)  # TODO location  - seconds
+
+    previous_hour = hour
+    previous_minutes = minutes
 
     #display.show()  # TODO needed?
 
