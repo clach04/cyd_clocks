@@ -12,5 +12,6 @@ screen. Relies on Micropython with library/libraries:
 Demos:
 
   * tiny_8x8_clock_always_paint.py - 8x8 font, not really readable - basic test including ISO date display
+  * tiny_8x8_clock_always_paint_framebuf.py - NOT working https://github.com/clach04/cyd_clocks/issues/2
   * font_clock_always_paint.py - 12x24 font, still too small - basic test
   * clock-digits-4.py - small 7-segment style digit, still too small but larger than above - basic test - NOTE Work In Progress, has painting issues
