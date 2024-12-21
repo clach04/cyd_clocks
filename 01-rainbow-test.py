@@ -26,8 +26,10 @@ display = Display(
 )
 
 backlight = machine.Pin(21, machine.Pin.OUT)
-backlight.on()  # TODO review PWM instead of on/off
-
+backlight_pwm = machine.PWM(backlight)
+#backlight.on()  # TODO review PWM instead of on/off
+#backlight_pwm.duty(1023)  # 100%
+backlight_pwm.duty(512)  # 50%
 
 RED = color565(255,0,0)
 ORANGE = color565(255,128,0)
