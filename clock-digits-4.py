@@ -85,6 +85,10 @@ def drawThickHorizLine(x1, x2, y, width):
         display.line(x1, y+2, x2, y+2, 1);
     if width > 4:
         display.line(x1, y-2, x2, y-2, 1);
+    if width > 5:
+        display.line(x1, y+3, x2, y+3, 1);
+    if width > 6:
+        display.line(x1, y-3, x2, y-3, 1);
 
 # TODO option for angle/rounded ends
 def drawThickVertLine(y1, y2, x, width):
@@ -97,7 +101,11 @@ def drawThickVertLine(y1, y2, x, width):
         display.line(x+2, y1, x+2, y2, 1);
     if width > 4:
         display.line(x-2, y1, x-2, y2, 1);
-        
+    if width > 5:
+        display.line(x+3, y1, x+3, y2, 1);
+    if width > 6:
+        display.line(x-3, y1, x-3, y2, 1);
+
 # x and y are the center of the digit, size is the center to edge
 def drawDigit(digit, x, y, size, width):  # FIXME does not clear existing digit on screen
   segmentOn = segmentMapping[digit];
@@ -154,7 +162,7 @@ def update_screen():
     if previous_hour != hour:
         if hour < 10:
             # just draw the second digit
-            display.fill_rectangle(lm + dw - cm - 4 - (int(width / 2)), dch - (12 * scale_factor), dw + 1, dch, color565(0, 0, 255))  # or what ever should be under number...
+            display.fill_rectangle(lm + dw - cm - 6 - (int(width / 2)), dch - (12 * scale_factor), dw + 6, dch, color565(0, 0, 255))  # or what ever should be under number...
             drawDigit(hour, lm+dw, dch, dr, width)
         else:
             # TODO 24-hour support
@@ -173,12 +181,12 @@ def update_screen():
     if previous_minutes != minutes:
         #display.fill_rectangle(x, y, w, h, color565(0, 0, 0))  # or what ever should be under number...
         #display.fill_rectangle(lm + dw * 2 +cm, dch, dw, dch, color565(255, 0, 0))  # or what ever should be under number...
-        display.fill_rectangle(lm + dw * 2 - 4 - (int(width / 2)), dch - (12 * scale_factor), dw + 1, dch, color565(255, 0, 0))  # or what ever should be under number...
+        display.fill_rectangle(lm + dw * 2 - 6 - (int(width / 2)), dch - (12 * scale_factor), dw + 6, dch, color565(255, 0, 0))  # or what ever should be under number...
         # value, x, y, size
         # left minute digit after the colon
         drawDigit(minutes // 10, lm + dw * 2 +cm, dch, dr, width)
         # right minute digit
-        display.fill_rectangle(lm + dw * 3 - (int(width / 2)), dch - (12 * scale_factor), dw + 4, dch, color565(0, 255, 0))  # or what ever should be under number...
+        display.fill_rectangle(lm + dw * 3 - (int(width / 2)), dch - (12 * scale_factor), dw + 5, dch, color565(0, 255, 0))  # or what ever should be under number...
         drawDigit(minutes % 10, lm + dw * 3 + cm + (2 * scale_factor), dch, dr, width)
 
     # draw the AM/PM
