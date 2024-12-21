@@ -34,10 +34,7 @@ backlight.on()  # TODO review PWM instead of on/off
 # NOTE expects local time set (via Thonny) for now
 
 # setup functions for time, note this is both for API (readability) but it also massively impacts performance by reducing module lookup (almost 50fps with simple clock)
-#timer_function = utime.time
 timer_function = time.time
-
-#local_time_tuple_function = utime.localtime
 local_time_tuple_function = time.localtime  # NOTE **not** a struct under micropython!
 
 COLOR_WHITE = color565(255, 255, 255)
