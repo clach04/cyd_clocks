@@ -114,12 +114,14 @@ def drawDigit(digit, x, y, size, width):  # FIXME does not clear existing digit 
 
 def update_screen():
     #display.fill(0)  # TODO?
-    dr = 10 # digit radius
-    dch = 26 # digit center hight
-    lm = 10 # left margin for all 4-digits
-    dw = 24 # digit width (2*dr + spacing between digits
-    cm = 8 # colon left margin
-    width = 3
+    # Scale factor of 4 is too large for 24-hour format display
+    scale_factor = 3
+    dr = 10 * scale_factor  # digit radius
+    dch = 26 * scale_factor  # digit center height
+    lm = 10  * scale_factor  # left margin for all 4-digits
+    dw = (2 * dr) + 4  # digit width (2*dr + spacing between digits)
+    cm = 8  * scale_factor # colon left margin  # FIXME needs work
+    width = 3 * scale_factor
     
     # draw the hour digits
     hour = localtime()[3]
@@ -136,19 +138,19 @@ def update_screen():
         # we have 10, 11 or 12 so the first digit is 1
         drawDigit(1, lm, dch, dr, width)
         # subtract 10 from the second digit
-        drawDigit(hour-10, lm+dw, dch, dr, width)
+        drawDigit(hour - 10, lm + dw, dch, dr, width)
        
     # draw the colon
     if localtime()[5] % 2:
-        draw_colon(lm+dw*2+cm-16,dch-5)
+        draw_colon(lm + dw * 2 + cm - (16 * scale_factor), dch - (5 * scale_factor), scale_factor)  # FIXME location needs work
     
     # draw the minutes
     minutes = localtime()[4]
     # value, x, y, size
     # left minute digit after the colon
-    drawDigit(minutes // 10, lm+dw*2+cm, dch, dr, width)
+    drawDigit(minutes // 10, lm + dw * 2 +cm, dch, dr, width)
     # right minute digit
-    drawDigit(minutes % 10, lm+dw*3+cm+2, dch, dr, width)
+    drawDigit(minutes % 10, lm + dw * 3 + cm + (2 * scale_factor), dch, dr, width)
     
     # draw the AM/PM
     display.text(am_pm, lm+dw*4+cm-8, dch+3, 1)  # TODO location (at-all? Use 24-hour)
@@ -157,9 +159,9 @@ def update_screen():
 
     #display.show()  # TODO needed?
 
-def draw_colon(x,y):
-    display.fill_rect(x, y, 2, 2,1)
-    display.fill_rect(x, y+8, 2, 2,1)
+def draw_colon(x, y, scale_factor):
+    display.fill_rect(x, y, (2 * scale_factor), (2 * scale_factor), 1)
+    display.fill_rect(x, y + (8 * scale_factor), (2 * scale_factor), (2 * scale_factor), 1)
 
 def timeStrFmt():
     hour = localtime()[3]
