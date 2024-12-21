@@ -18,7 +18,8 @@ display = Display(
             spi, dc=machine.Pin(2), cs=machine.Pin(15),
             rst=machine.Pin(15),
             width=320, height=240,  # ommit this and endup with square, with static on right hand side
-            bgr=False, gamma=True
+            bgr=False,
+            gamma=False
 )
 
 backlight = machine.Pin(21, machine.Pin.OUT)

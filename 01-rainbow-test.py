@@ -22,7 +22,7 @@ display = Display(
             width=320, height=240,  # ommit this and endup with square, with static on right hand side
             bgr=False,
             #gamma=True
-            gamma=False
+            gamma=False  # improves color on my CYD2 device
 )
 
 backlight = machine.Pin(21, machine.Pin.OUT)
@@ -46,7 +46,7 @@ display.fill_rectangle(100,0, 50,HEIGHT, YELLOW)
 display.fill_rectangle(150,0, 50,HEIGHT, GREEN)
 display.fill_rectangle(200,0, 50,HEIGHT, BLUE)
 display.fill_rectangle(250,0, 50,HEIGHT, PURPLE)
-display.fill_rectangle(300,0, 20,HEIGHT, WHITE)
+display.fill_rectangle(300,0, 20,HEIGHT, WHITE)  # NOTE truncated/thin/narrow
 
 
 print('Done')
