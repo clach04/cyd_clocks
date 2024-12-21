@@ -46,7 +46,20 @@ display.line = oled_line
 display.fill_rect = oled_fill_rect
 
 
-# TODO document segment map A-G
+"""segment map A-G
+
+https://en.wikipedia.org/wiki/Seven-segment_display
+
+     -A-
+    |   |
+    F   B
+    |   |
+     -G-
+    |   |
+    E   C
+    |   |
+     -D-
+"""
 segmentMapping = [
   #a, b, c, d, e, f, g
   [1, 1, 1, 1, 1, 1, 0], # 0
