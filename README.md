@@ -22,6 +22,7 @@ Demos:
 
   * tiny_8x8_clock_always_paint.py - 8x8 font, not really readable - basic test including ISO date display
   * font_clock_always_paint.py - 12x24 font, still too small - basic test
+  * font_clock_always_paint_UMB.py - 43x61 font (Ubuntu Mono Bold size 72, UbuntuMonoBold43x61numbers.c), currently too slow to be reliable for 1 second accuracy (needs accurate sleep math)
   * clock-digits-4.py - small 7-segment style digit, still too small but larger than above - basic test - NOTE Work In Progress, has painting issues
   * 01-rainbow-test.py - simple full screen rainbow color demo
   * demo_pbm.py - invader sprite/gfx blit demo - NOTE needs pbm https://github.com/rdagger/micropython-ili9341/blob/master/images/invaders48x36.pbm
