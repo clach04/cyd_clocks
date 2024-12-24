@@ -1,4 +1,4 @@
-# font_clock_always_paint.py
+# font_clock_always_paint_UMB.py
 """Micropython Clock that paints every time it gets a chance, so as to measure FPS
 Uses on-disk font.
 
@@ -61,6 +61,16 @@ def display_clock():
     #unispace = XglcdFont('fonts/umb31x57_numbers.c', 31, 57)  # entire us-ascii set causes; MemoryError: memory allocation failed, allocating 23904 bytes
     #unispace = XglcdFont('fonts/umb31x57_numbers.c', 29, 42, start_letter=48, letter_count=11)  # size 48 font import Ubuntu Mono Bold
     unispace = XglcdFont('fonts/UbuntuMonoBold43x61numbers.c', 43, 61, start_letter=48, letter_count=11)  # Ubuntu Mono Bold size 72 font import
+    ## DEBUG -----------
+    print(unispace)
+    print(unispace.letters)
+    print(unispace.width)
+    print(unispace.height)
+    print(unispace.start_letter)
+    print(unispace.letter_count)
+    print(unispace.bytes_per_letter)
+    ## DEBUG -----------
+
     xpos = 0
     ypos = 0
 
