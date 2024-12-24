@@ -40,3 +40,4 @@ Demos:
   * demo_pbm.py - invader sprite/gfx blit demo - NOTE needs pbm https://github.com/rdagger/micropython-ili9341/blob/master/images/invaders48x36.pbm
   * cyd_wrap.py - simple wrapper
       * rainbow-test.py - simple full screen rainbow color demo
+      * font_clock_timer_paint.py - simple font based clock
