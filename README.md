@@ -15,7 +15,6 @@ on ESP32:
 
 LCD has printed TPM408-2.8
 
-
 Relies on Micropython with library/libraries:
 
   * https://github.com/de-dh/ESP32-Cheap-Yellow-Display-Micropython-LVGL/tree/main/demo_no_lvgl
