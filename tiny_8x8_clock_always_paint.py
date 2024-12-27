@@ -1,13 +1,19 @@
 # tiny_8x8_clock_always_paint.py
 """Micropython Clock that paints every time it gets a chance, so as to measure FPS
 
-~ 450fps for dumb small text font
+~ 450fps for dumb small text font - no date? with lvgl old MicroPython build?
+# CPU clock frequency is adjustable from 80 MHz to 240 MHz
+ESP32 generic - MicroPython v1.24.1 on 2024-11-29; Generic ESP32 module with ESP32
+ 98 FPS with 80Mhz - machine.freq(160000000)
+125 FPS with 160Mhz - machine.freq(160000000)
+137 FPS with 240Mhz - machine.freq(240000000)
 
 https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/Examples/Micropython/Micropython.md
 
 """
 
 import machine
+#machine.freq(80000000)
 #from machine import Pin, SPI  # TODO style decision
 import time
 #import utime  # docs recommend against this, as likely to go away
