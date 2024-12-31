@@ -34,6 +34,7 @@ TODO look at async / uasyncio
 """
 
 import machine
+import network
 import requests
 import time
 
@@ -148,14 +149,20 @@ def rtc_update():
 
 try:
     ssid = 'SClock'
+    network.hostname(ssid.lower())  # TODO + last 4 digits of mac?
     display.draw_text8x8(0, 10, 'Trying to start WiFi', COLOR_WHITE, COLOR_BLACK)
     display.draw_text8x8(0, 18, 'ssid: %s' % ssid, COLOR_WHITE, COLOR_BLACK)
     wlan = None
     while wlan is None:
         print("Trying to start WiFi network connection.")
         wlan = WifiManager(ssid=ssid).get_connection()
+    print("Clock connected to WiFi network")
+    print("%r" % (wlan.ifconfig(),))  # IP address, subnet mask, gateway, DNS server
+    print("%r" % (wlan.config('mac'),))  # MAC in bytes
+    print("SSID: %r" % (wlan.config('ssid'),))
+    print("hostname: %r" % (network.hostname(),))
 
-    display.draw_text8x8(0, 24, 'Connected TODO SID.. Sync RTC', COLOR_WHITE, COLOR_BLACK)
+    display.draw_text8x8(0, 24, 'Connected %s Sync RTC' % wlan.config('ssid'), COLOR_WHITE, COLOR_BLACK)
     if rtc_update():
         display.clear()
     else:
