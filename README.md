@@ -2,8 +2,9 @@
 
 CYD clock experiments https://github.com/clach04/cyd_clocks
 
-Written for use with ESP32-2432S028R - an esp32 based device with built-in
-screen.
+Written for use with ESP32-2432S028R - an esp32 based device with built-in screen.
+
+NOTE some scripts expect/need/rely on https://github.com/clach04/MicroWiFiManager/tree/mine
 
 Hardware notes, printed ids:
 
