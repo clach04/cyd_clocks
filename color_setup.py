@@ -48,10 +48,16 @@ gc.collect()  # Precaution before instantiating framebuf
 #spi = SPI(1, 40_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi), miso=Pin(12))
 #spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi), miso=Pin(12))
 spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))
-ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst)
+
 
 # NOTE on CYD1 clock is upside down.
 # With power usb bottom right from front, clock is bottom right hand and upside down
+# setting usd to True will correct this
+# TODO for CYD2 probably need to pass in height=320, width=240 (i.e. transposed compared with default and CYD1)
+usd = False  # Default
+usd = True
+
+ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, usd=usd)
 
 # on CYD need to turn on backlight to see anything
 backlight_percentage = 50
