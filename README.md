@@ -33,6 +33,7 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
 
 Demos:
 
+  * color_setup.py - setup/config for using CYD with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui
   * hw_info.py - Dump device information out to the serial port
   * wifi_clock_timer.py - WiFi clock. no touch screen or button control, configure network via SClock said, by opening http://192.168.4.1 (DNS captive portal doesn't work well). NOTE **http** not https.
   * tiny_8x8_clock_always_paint.py - 8x8 font, not really readable - basic test including ISO date display
