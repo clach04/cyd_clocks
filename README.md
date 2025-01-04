@@ -22,6 +22,9 @@ Relies on Micropython with library/libraries:
       * Original https://github.com/rdagger/micropython-ili9341
   * https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/
 
+The code in this repo was originally written to support MicroPython 1.19.1,
+but may (soon) require MicroPython 1.24.1+.
+
 NOTE on my device color reproduction is improved with changes in ILI9341 init,
 either pass in `gamma=False` or modify driver with changes from https://github.com/de-dh/ESP32-Cheap-Yellow-Display-Micropython-LVGL/tree/main/demo_no_lvgl:
 
