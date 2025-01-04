@@ -53,6 +53,12 @@ ap_addr = printable_mac(wlan_ap.config('mac'))
 print('Regular MAC      %r' % (wlan_sta.config('mac'),))
 print('Regular MAC      %r' % (cl_addr,))
 print('AP MAC           %r' % (ap_addr,))
+try:
+    print('network.hostname %r' % (network.hostname(),))
+except AttributeError:
+    # older micropython. 1.19? pre 1.24?
+    print('network.hostname NOT_AVAILABLE_OLD_MP')
+print('IP details %r' % (wlan_ap.ifconfig(),))
 
 ble = bluetooth.BLE()  # defaults to addr_mode == PUBLIC 
 ble.active(True)
