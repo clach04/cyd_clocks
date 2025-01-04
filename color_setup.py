@@ -52,7 +52,7 @@ spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))
 
 # NOTE on CYD1 clock is upside down.
 # With power usb bottom right from front, clock is bottom right hand and upside down
-# setting usd to True will correct this
+# setting usd to True will correct this - https://github.com/peterhinch/micropython-nano-gui/blob/master/DRIVERS.md#32-drivers-for-ili9341
 # TODO for CYD2 probably need to pass in height=320, width=240 (i.e. transposed compared with default and CYD1)
 usd = False  # Default
 usd = True
