@@ -2,6 +2,7 @@
 """determine MicroPython (ESP32) hardware details
 """
 
+import gc
 import os
 import platform
 import sys
@@ -22,6 +23,9 @@ def printable_mac(in_bytes, seperator=':'):
     else:
         return in_bytes.hex()
 
+print('gc.mem_free %r - pre-collect' % (gc.mem_free(),))
+gc.collect()
+print('gc.mem_free %r - post-collect' % (gc.mem_free(),))
 print('os.uname %r' % (os.uname(),))
 print('platform.platform %r' % (platform.platform(),))
 print('sys.implementation %r' % (sys.implementation,))
