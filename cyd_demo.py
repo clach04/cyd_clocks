@@ -47,17 +47,17 @@ if False:  # skip SD card test/demo
 # TODO move into cyd_wrap
 # Read light sensor
 lightsensor = ADC(34, atten=ADC.ATTN_0DB)
-print(lightsensor.read_uv())
+print(lightsensor.read_uv())  # my CYD1 always returns 75000 (from reports online, often this does not work)
 
 
-# TODO move into cyd_wrap
+# TODO move into cyd_wrap - also use SoftSPI to avoid conflicts.
 # Read touch screen
-# From anecdotes online, should use SoftSPI to avoid conflicts.
 #touch_spi = SPI(1, baudrate=1_000_000, sck=Pin(25), mosi=Pin(32), miso=Pin(39))
-touch_spi = SoftSPI(baudrate=1_000_000, sck=Pin(25), mosi=Pin(32), miso=Pin(39))
+#touch_spi = SoftSPI(baudrate=1_000_000, sck=Pin(25), mosi=Pin(32), miso=Pin(39))
+touch_spi = SoftSPI(sck=Pin(25), mosi=Pin(32), miso=Pin(39))  # unclear on baud rate, may be 2.5Mhz?
 
 def touchscreen_press(x, y):
-    print("Touch at " + str(x) + "," + str(y))
+    print("Touch at " + str(x) + "," + str(y))  # only seems to work for single-press-and-release, not continuous drawing
 
 touch = Touch(touch_spi, cs=Pin(33), int_pin=Pin(36), int_handler=touchscreen_press)
 
