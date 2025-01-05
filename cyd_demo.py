@@ -57,9 +57,10 @@ print(lightsensor.read_uv())  # my CYD1 always returns 75000 (from reports onlin
 touch_spi = SoftSPI(sck=Pin(25), mosi=Pin(32), miso=Pin(39))  # unclear on baud rate, may be 2.5Mhz?
 
 def touchscreen_press(x, y):
-    print("Touch at " + str(x) + "," + str(y))  # only seems to work for single-press-and-release, not continuous drawing
+    print("Touch at " + str(x) + "," + str(y))  # only seems to work for single-press-and-release, not continuous drawing (possibly due to debounce code?)
 
 touch = Touch(touch_spi, cs=Pin(33), int_pin=Pin(36), int_handler=touchscreen_press)
+#touch = Touch(touch_spi, cs=Pin(33), int_handler=touchscreen_press)  # this does NOT work
 
 # loop to wait for touchscreen test
 try:
