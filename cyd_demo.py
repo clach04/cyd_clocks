@@ -1,6 +1,6 @@
 # based on https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/Examples/Micropython/demo.py
 
-from machine import Pin, SPI, SDCard, ADC, idle
+from machine import Pin, SPI, SoftSPI, SDCard, ADC, idle
 import os
 
 # https://github.com/rdagger/micropython-ili9341
@@ -50,9 +50,11 @@ lightsensor = ADC(34, atten=ADC.ATTN_0DB)
 print(lightsensor.read_uv())
 
 
-# TODO move into cyd_wrap - also use SoftSPI to avoid conflicts.
+# TODO move into cyd_wrap
 # Read touch screen
-touch_spi = SPI(1, baudrate=1000000, sck=Pin(25), mosi=Pin(32), miso=Pin(39))
+# From anecdotes online, should use SoftSPI to avoid conflicts.
+#touch_spi = SPI(1, baudrate=1_000_000, sck=Pin(25), mosi=Pin(32), miso=Pin(39))
+touch_spi = SoftSPI(baudrate=1_000_000, sck=Pin(25), mosi=Pin(32), miso=Pin(39))
 
 def touchscreen_press(x, y):
     print("Touch at " + str(x) + "," + str(y))
