@@ -23,7 +23,22 @@ PIN_rst = 15
 
 WIDTH = 320
 HEIGHT = 240
-# TODO rotate..
+
+# TODO consider using const?
+# EDIT_ME!
+number_of_usb_ports = 1
+number_of_usb_ports = 2
+
+if number_of_usb_ports == 1:
+    default_bgr = True
+    default_gamma = True
+    default_rotation = 270
+else:  # if number_of_usb_ports == 2:
+    default_bgr = False
+    default_gamma = False
+    default_rotation = 0
+
+# TODO mirror support?
 
 class CYD():
     def __init__(self,
@@ -31,8 +46,9 @@ class CYD():
         dc=PIN_dc, cs=PIN_cs, rst=PIN_rst,  # ili9341 display
         width=WIDTH, height=HEIGHT,
         backlight_percentage=50,
-        bgr=True,  # False for CYD2 with 2 USB ports (includes USB-C) - rgb/bgr switch
-        gamma=True,  # False improves color on my CYD2 device (orange looks Brown by default). On CYD1 minor difference, True is slightly better for Orange
+        bgr=default_bgr,  # False for CYD2 with 2 USB ports (includes USB-C) - rgb/bgr switch
+        gamma=default_gamma,  # False improves color on my CYD2 device (orange looks Brown by default). On CYD1 minor difference, True is slightly better for Orange
+        rotation=default_rotation,  # CYD1 270 matches CYD2 0. With CYD1 (0,0) top-left appears to be portrait with USB port top-right. With CYD2 (0,0) top-left landscape with USB port bottom-right
         self_cleanup = True
     ):
         self.self_cleanup = self_cleanup
@@ -46,7 +62,7 @@ class CYD():
                     self.spi,
                     dc=machine.Pin(dc), cs=machine.Pin(cs), rst=machine.Pin(rst),
                     width=width, height=height,  # omit this and endup with square, with static on right hand side
-                    rotation=270,  # CYD1 270 matches CYD2. With CYD1 (0,0) top-left appears to be portrait with USB port top-right. With CYD2 (0,0) top-left landscape with USB port bottom-right
+                    rotation=rotation,
                     bgr=bgr,
                     gamma=gamma
         )
