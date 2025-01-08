@@ -35,3 +35,4 @@ try:
 finally:
     # Leave screen alone/on for visual inspection - uncomment below to change that
     #cyd.cleanup()
+    pass
