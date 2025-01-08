@@ -1,11 +1,12 @@
 # rainbow-test.py
+# Sanity check rotation and colors
 
 import cyd_wrap
 from cyd_wrap import color565, WIDTH, HEIGHT
 
 
 RED = color565(255,0,0)
-ORANGE = color565(255,128,0)
+ORANGE = color565(255,128,0)  # if this looks brown, check cyd_wrap; bgr and gamma
 YELLOW = color565(255,255,0)
 GREEN = color565(0,255,0)
 BLUE = color565(0,0,255)

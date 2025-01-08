@@ -4,7 +4,6 @@ from machine import Pin, SPI, SoftSPI, SDCard, ADC, idle
 import os
 
 # https://github.com/rdagger/micropython-ili9341
-from ili9341 import Display, color565
 from xpt2046 import Touch
 
 import cyd_wrap
@@ -16,7 +15,8 @@ display = cyd.display
 
 display_spi = display.spi
 
-# Clear display to yellow
+# Clear display to yellow - not CYD2 with incorrect cyd_wrap settings this may show as blue not yellow (and rotation may also be incorrect)
+# sanity check; bgr, gamma, rotation
 display.clear(color565(255, 255, 0))
 
 # TODO move into cyd_wrap (potentially fake as a NeoPixel?)
