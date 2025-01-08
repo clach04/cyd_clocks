@@ -4,17 +4,23 @@
 
 import gc
 import os
-import platform
+try:
+    import platform
+except ImportError:
+    platform = None  # endup here with Adafruit CircuitPython 9.2.1 on 2024-11-20; sunton_esp32_2432S028 with ESP32
 import sys
 
 # MicroPython specific
-import bluetooth
+try:
+    import bluetooth
+    import machine
+    import network
+except ImportError:
+    bluetooth = machine = network = None  # end up here with Adafruit CircuitPython 9.2.1 on 2024-11-20; sunton_esp32_2432S028 with ESP32
 try:
     import esp
 except ImportError:
     esp = None
-import machine
-import network
 
 
 def printable_mac(in_bytes, seperator=':'):
@@ -27,48 +33,52 @@ print('gc.mem_free %r - pre-collect' % (gc.mem_free(),))
 gc.collect()
 print('gc.mem_free %r - post-collect' % (gc.mem_free(),))
 print('os.uname %r' % (os.uname(),))
-print('platform.platform %r' % (platform.platform(),))
+if platform:
+    print('platform.platform %r' % (platform.platform(),))
 print('sys.implementation %r' % (sys.implementation,))
 print('sys.platform %r' % (sys.platform,))
 print('sys.version %r' % (sys.version,))
 print('sys.version_info %r' % (sys.version_info,))
-print('machine.unique_id %r' % (machine.unique_id(),))
-micropython_version = list(map(int, os.uname().release.split('.')))  # very complicated version of sys.implementation.version (which returns a tuple
-print('micropython_version %r' % (micropython_version,))
-if micropython_version > [1, 19, 1]:
-    print('machine.unique_id %r' % (machine.unique_id().hex(),))
+if machine:
+    print('machine.unique_id %r' % (machine.unique_id(),))
+    micropython_version = list(map(int, os.uname().release.split('.')))  # very complicated version of sys.implementation.version (which returns a tuple
+    print('micropython_version %r' % (micropython_version,))
+    if micropython_version > [1, 19, 1]:
+        print('machine.unique_id %r' % (machine.unique_id().hex(),))
 if esp:
     print('esp.flash_size() %r' % (esp.flash_size(),))
 # TODO determine why esp.flash_id() is  ESP8266 only
 
 
+if network:
+    wlan_ap = network.WLAN(network.AP_IF)
+    wlan_sta = network.WLAN(network.STA_IF)
 
-wlan_ap = network.WLAN(network.AP_IF)
-wlan_sta = network.WLAN(network.STA_IF)
+    # MAC is in bytes
+    cl_addr = printable_mac(wlan_sta.config('mac'))
+    ap_addr = printable_mac(wlan_ap.config('mac'))
 
-# MAC is in bytes
-cl_addr = printable_mac(wlan_sta.config('mac'))
-ap_addr = printable_mac(wlan_ap.config('mac'))
+    print('Regular MAC      %r' % (wlan_sta.config('mac'),))
+    print('Regular MAC      %r' % (cl_addr,))
+    print('AP MAC           %r' % (ap_addr,))
 
-print('Regular MAC      %r' % (wlan_sta.config('mac'),))
-print('Regular MAC      %r' % (cl_addr,))
-print('AP MAC           %r' % (ap_addr,))
-try:
-    print('network.hostname %r' % (network.hostname(),))
-except AttributeError:
-    # older micropython. 1.19? pre 1.24?
-    print('network.hostname NOT_AVAILABLE_OLD_MP')
-print('IP details %r' % (wlan_ap.ifconfig(),))
+    try:
+        print('network.hostname %r' % (network.hostname(),))
+    except AttributeError:
+        # older micropython. 1.19? pre 1.24?
+        print('network.hostname NOT_AVAILABLE_OLD_MP')
+    print('IP details %r' % (wlan_ap.ifconfig(),))
 
-ble = bluetooth.BLE()  # defaults to addr_mode == PUBLIC 
-ble.active(True)
-ble_pub_addr = ble.config('mac')  # MAC tuple, with MAC in bytes
-ble.active(False)
+if bluetooth:
+    ble = bluetooth.BLE()  # defaults to addr_mode == PUBLIC
+    ble.active(True)
+    ble_pub_addr = ble.config('mac')  # MAC tuple, with MAC in bytes
+    ble.active(False)
+    print('BT-LE Public MAC %r' % (ble_pub_addr,))
 
-print('BT-LE Public MAC %r' % (ble_pub_addr,))
-if micropython_version > [1, 19, 1]:
-    print('BT-LE Public MAC %r' % (printable_mac(ble_pub_addr[1], seperator=''),))
-print('BT-LE Public MAC %r' % (printable_mac(ble_pub_addr[1]),))
+    if micropython_version > [1, 19, 1]:
+        print('BT-LE Public MAC %r' % (printable_mac(ble_pub_addr[1], seperator=''),))
+    print('BT-LE Public MAC %r' % (printable_mac(ble_pub_addr[1]),))
 
 check_i2c_bus = False
 if check_i2c_bus:
