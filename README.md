@@ -36,7 +36,7 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
     # TODO another; sleep(.1)
 
 
-Demos:
+## Demos
 
   * color_setup.py - setup/config for using CYD with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui
   * hw_info.py - Dump device information out to the serial port
@@ -52,3 +52,16 @@ Demos:
   * cyd_wrap.py - simple wrapper
       * rainbow-test.py - simple full screen rainbow color demo
       * font_clock_timer_paint.py - simple font based clock
+
+
+## Test Images
+
+Test cards from https://en.wikipedia.org/wiki/Test_card
+
+  * SMPTE color bars: common NTSC test pattern https://en.wikipedia.org/wiki/File:SMPTE_Color_Bars.svg
+  * Test card Philips PM5544: common PAL test pattern https://en.wikipedia.org/wiki/File:Philips_PM5544.svg
+  * European Broadcasting Union color bar test patternfor Standard-definition television. EBU colour bars (4:3) https://en.wikipedia.org/wiki/File:EBU_Colorbars.svg
+
+License either Public Domain or Creative Commons
+
+See [images](./images).
