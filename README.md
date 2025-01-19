@@ -38,6 +38,8 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
 
 ## Demos
 
+## MicroPython Demos
+
   * color_setup.py - setup/config for using CYD with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui
   * hw_info.py - Dump device information out to the serial port
   * hw_info_cp.py - Limited CircuitPython version of hw_info.py - Dump device information out to the serial port and screen
@@ -53,6 +55,12 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
       * rainbow-test.py - simple full screen rainbow color demo
       * font_clock_timer_paint.py - simple font based clock
 
+## CircuitPython Demos
+
+In directory [circuitpython](./circuitpython).
+
+  * bitmap_test.py - bitmap / picture / photo fullscreen demo
+      * uses 240x320.bmp which is EBU_Colorbars converted into 24-bit Windows BitMap
 
 ## Test Images
 
