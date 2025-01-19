@@ -29,4 +29,4 @@ for i in range(100):
 # Wait forever
 while True: pass
 
-
+# On exit/completion display will reset and image will be lost from screen
