@@ -40,25 +40,33 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
 
 ## MicroPython Demos
 
-  * color_setup.py - setup/config for using CYD with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui
   * hw_info.py - Dump device information out to the serial port
-  * hw_info_cp.py - Limited CircuitPython version of hw_info.py - Dump device information out to the serial port and screen
+
+Nano GUI
+
+  * color_setup.py - setup/config for using CYD with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui - see https://github.com/peterhinch/micropython-nano-gui/blob/master/setup_examples/ili9341_esp32_2432S028r.py
+      * use with demos like gui.demos.aclock_large - https://github.com/peterhinch/micropython-nano-gui/blob/master/gui/demos/aclock_large.py
+
+ili9341 driver
+
+  * cyd_wrap.py - simple wrapper NOTE look for EDIT_ME and modify for your device
+      * rainbow-test.py - simple full screen rainbow color demo
+      * font_clock_timer_paint.py - simple font based clock
+      * cyd_demo.py - simple hardware demo. screen, RGB LED, light sensor, and touch screen
+
   * wifi_clock_timer.py - WiFi clock. no touch screen or button control, configure network via SClock said, by opening http://192.168.4.1 (DNS captive portal doesn't work well). NOTE **http** not https.
-  * cyd_demo.py - simple hardware demo. screen, RGB LED, light sensor, and touch screen
   * tiny_8x8_clock_always_paint.py - 8x8 font, not really readable - basic test including ISO date display
   * font_clock_always_paint.py - 12x24 font, still too small - basic test
   * font_clock_always_paint_UMB.py - 43x61 font (Ubuntu Mono Bold size 72, UbuntuMonoBold43x61numbers.c), currently too slow to be reliable for 1 second accuracy (needs accurate sleep math)
   * clock-digits-4.py - small 7-segment style digit, still too small but larger than above - basic test - NOTE Work In Progress, has painting issues
   * 01-rainbow-test.py - simple full screen rainbow color demo
   * demo_pbm.py - invader sprite/gfx blit demo - NOTE needs pbm https://github.com/rdagger/micropython-ili9341/blob/master/images/invaders48x36.pbm
-  * cyd_wrap.py - simple wrapper
-      * rainbow-test.py - simple full screen rainbow color demo
-      * font_clock_timer_paint.py - simple font based clock
 
 ## CircuitPython Demos
 
 In directory [circuitpython](./circuitpython).
 
+  * hw_info_cp.py - Limited CircuitPython version of hw_info.py - Dump device information out to the serial port and screen
   * bitmap_test.py - bitmap / picture / photo fullscreen demo
       * uses 240x320.bmp which is EBU_Colorbars converted into 24-bit Windows BitMap
 
