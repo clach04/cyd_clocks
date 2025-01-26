@@ -11,15 +11,18 @@ refresh(ssd, True)  # Initialise and clear display.
 
 """
  _
-|_|  Red Square (outline)
+|_|  Red Square (outline or filled depending on filled variable below)
   \
    \ Green line
     \ _
-     |_| Blue Square (outline)
+     |_| Blue Square (outline/filled)
 
 """
+filled = False  # useful to ensuring have perfect pixel end of screen
+filled = True
+
 ssd.fill(0)
 ssd.line(0, 0, ssd.width - 1, ssd.height - 1, GREEN)  # Green diagonal corner-to-corner
-ssd.rect(0, 0, 15, 15, RED)  # Red square at top left
-ssd.rect(ssd.width -15, ssd.height -15, 15, 15, BLUE)  # Blue square at bottom right
+ssd.rect(0, 0, 15, 15, RED, filled)  # Red square at top left
+ssd.rect(ssd.width -15, ssd.height -15, 15, 15, BLUE, filled)  # Blue square at bottom right
 refresh(ssd)
