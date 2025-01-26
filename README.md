@@ -50,6 +50,8 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
 
 ili9341 driver
 
+Needs https://github.com/rdagger/micropython-ili9341
+
   * cyd_wrap.py - simple wrapper NOTE look for EDIT_ME and modify for your device
       * rainbow-test.py - simple full screen rainbow color demo
       * font_clock_timer_paint.py - simple font based clock
