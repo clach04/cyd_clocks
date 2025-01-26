@@ -21,10 +21,14 @@ def display_function():
 
     #color_list = [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, WHITE, BLACK]
     color_list = [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, WHITE]
+
+    # generate vertical bars
     bar_width = int(WIDTH / len(color_list))
+    bar_height = HEIGHT
+
     offset = 0
     for color in color_list:
-        display.fill_rectangle(offset, 0, bar_width, HEIGHT, color)
+        display.fill_rectangle(offset, 0, bar_width, bar_height, color)
         offset += bar_width
 
     print('Done')  # to serial port
