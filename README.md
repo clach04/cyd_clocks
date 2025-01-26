@@ -44,6 +44,7 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
 
 Nano GUI
 
+See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-quick-start for how to gets started (use mpremote and try a demo)
   * color_setup.py - setup/config for using CYD with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui - see https://github.com/peterhinch/micropython-nano-gui/blob/master/setup_examples/ili9341_esp32_2432S028r.py
       * use with demos like gui.demos.aclock_large - https://github.com/peterhinch/micropython-nano-gui/blob/master/gui/demos/aclock_large.py
 
