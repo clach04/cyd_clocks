@@ -10,13 +10,14 @@ refresh(ssd, True)  # Initialise and clear display.
 # ssd.wait_until_ready()
 
 """
+(0,0)
  _
 |_|  Red Square (outline or filled depending on filled variable below)
   \
    \ Green line
     \ _
      |_| Blue Square (outline/filled)
-
+  (x, y)
 """
 filled = False  # useful to ensuring have perfect pixel end of screen
 filled = True
