@@ -2,7 +2,6 @@
 # Sanity check rotation and colors
 
 from color_setup import ssd  # Create a display instance
-from color_setup import width as WIDTH, height as HEIGHT
 from gui.core.colors import create_color, RED, YELLOW, GREEN, BLUE, MAGENTA as PURPLE, WHITE, BLACK
 from gui.core.nanogui import refresh
 
@@ -11,14 +10,15 @@ ORANGE = create_color(12, 255,128,0)
 
 
 def display_function():
+    width, height = ssd.width, ssd.height
     refresh(ssd, True)  # Initialise and clear display.
 
     #color_list = [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, WHITE, BLACK]
     color_list = [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, WHITE]
 
     # generate vertical bars
-    bar_width = int(WIDTH / len(color_list))
-    bar_height = HEIGHT
+    bar_width = int(width / len(color_list))
+    bar_height = height
 
     offset = 0
     for color in color_list:
