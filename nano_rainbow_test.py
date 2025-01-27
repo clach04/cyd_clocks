@@ -3,11 +3,11 @@
 
 from color_setup import ssd  # Create a display instance
 from color_setup import width as WIDTH, height as HEIGHT
-from gui.core.colors import RED, LIGHTGREEN, YELLOW, GREEN, BLUE, MAGENTA as PURPLE, WHITE, BLACK
+from gui.core.colors import create_color, RED, YELLOW, GREEN, BLUE, MAGENTA as PURPLE, WHITE, BLACK
 from gui.core.nanogui import refresh
 
 
-ORANGE = LIGHTGREEN  # FIXME
+ORANGE = create_color(12, 255,128,0)
 
 
 def display_function():
