@@ -28,7 +28,7 @@ def display_function():
 
     offset = 0
     for color in color_list:
-        display.fill_rectangle(offset, 0, bar_width, bar_height, color)
+        display.fill_rectangle(offset, 0, bar_width, bar_height, color)  # (0, 0) is top left, (320, 240) is bottom right
         offset += bar_width
 
     print('Done')  # to serial port
