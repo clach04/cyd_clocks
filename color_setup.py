@@ -51,36 +51,62 @@ spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))
 
 # TODO consider using const?
 # EDIT_ME!
+
 number_of_usb_ports = 1
 number_of_usb_ports = 2
-
 if number_of_usb_ports == 1:
-    # NOTE on CYD1 clock is upside down, with default parameters into ILI9341 display driver
-    # With power usb bottom right from front, clock is bottom right hand and upside down
-    # setting usd to True will correct this - https://github.com/peterhinch/micropython-nano-gui/blob/master/DRIVERS.md#32-drivers-for-ili9341
-
-    # landscape - CYD1
-    ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, usd=True)  # CYD - with single USB port, height=240, width=320 - works in landscape mode
-    #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, usd=True, rotated=True)  # CYD - with single USB port, height=240, width=320 - works in landscape mode
-    ##ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, usd=True, rotated=False)  # CYD - with single USB port, height=240, width=320 - GARBAGE displayed
-
-    # portrait - CYD1
-    #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=False, rotated=False)  # CYD - with single USB port - works in portrait mode, with USB at top of screen
-    #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=True, rotated=False)  # CYD - with single USB port - works in portrait mode, with USB at bottom of screen
-    ##ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=False, rotated=True)  # CYD - with single USB port - GARBAGE displayed
+    # CYD / CYD1 NOTE not working properly yet, flipped or mirrored - unclear which
+    default_mod = None
+    default_bgr = False
+    default_usd = True
+    height, width = 240, 320
 else:  # if number_of_usb_ports == 2:
-    # NOTE on CYD2 display is rotated, in comparison to CYD1
+    # CYD2
+    # NOTE on (first) init, CYD2 screen will contain static (unlike CYD1)
+    #default_mod = 1  # 1, 3, 5, and 7 is GARBAGE
+    #default_mod = 0  # 0  appears to be landscape mirror flipped vertically - (0, 0) is top right hand corner
+    #default_mod = 2  # 2 is landscape, flipped/mirrored somehow (TBD) - (0, 0) is bottom right hand corner
+    #default_mod = 4  # 4 is landscape, correct! - (0, 0) is top left hand corner
+    #default_mod = 6  # 4 is landscape, flipped/mirrored somehow (TBD) - (0, 0) is bottom left hand corner
+    default_mod = 4  # 4 is landscape, correct! - (0, 0) is top left hand corner
+    default_bgr = True  # TODO
+    default_usd = False
+    default_rotation = 0
+    # landscape
+    height, width = 240, 320
 
-    # landscape - CYD2
-    ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=240, width=320, usd=False, rotated=False)  # CYD2 with 2x USB ports
-    #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=240, width=320, usd=True, rotated=False)  # CYD2 with 2x USB ports, upside down
-    ####this does not work. Still figuring out nano landscape options for CYD2
 
-    # portrait - CYD2
-    # CYD2 - with 2 USB ports - NOTE when screen inits get static
-    #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=False, rotated=True)  # CYD2 with 2x USB ports, this works for portrait viewing, with USB at bottom of screen
-    #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=True, rotated=True)  # CYD2 with 2x USB ports, this works for portrait viewing, with USB at top of screen
+ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=height, width=width, usd=default_usd, mod=default_mod, bgr=default_bgr)
 
+############
+
+# NOTE on CYD1 clock is upside down, with default parameters into ILI9341 display driver
+# With power usb bottom right from front, clock is bottom right hand and upside down
+# setting usd to True will correct this - https://github.com/peterhinch/micropython-nano-gui/blob/master/DRIVERS.md#32-drivers-for-ili9341
+
+# landscape - CYD1
+#ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, usd=True)  # CYD - with single USB port, height=240, width=320 - works in landscape mode
+#ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, usd=True, rotated=True)  # CYD - with single USB port, height=240, width=320 - works in landscape mode
+##ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, usd=True, rotated=False)  # CYD - with single USB port, height=240, width=320 - GARBAGE displayed
+
+# portrait - CYD1
+#ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=False, rotated=False)  # CYD - with single USB port - works in portrait mode, with USB at top of screen
+#ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=True, rotated=False)  # CYD - with single USB port - works in portrait mode, with USB at bottom of screen
+##ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=False, rotated=True)  # CYD - with single USB port - GARBAGE displayed
+
+##################################
+
+# NOTE on CYD2 display is rotated, in comparison to CYD1
+
+# landscape - CYD2
+#ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=240, width=320, usd=False, rotated=False)  # CYD2 with 2x USB ports
+#ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=240, width=320, usd=True, rotated=False)  # CYD2 with 2x USB ports, upside down
+####this does not work. Still figuring out nano landscape options for CYD2
+
+# portrait - CYD2
+# CYD2 - with 2 USB ports - NOTE when screen inits get static
+#ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=False, rotated=True)  # CYD2 with 2x USB ports, this works for portrait viewing, with USB at bottom of screen
+#ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=True, rotated=True)  # CYD2 with 2x USB ports, this works for portrait viewing, with USB at top of screen
 
 # on CYD need to turn on backlight to see anything
 backlight_percentage = 50
