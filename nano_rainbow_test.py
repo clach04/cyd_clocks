@@ -1,4 +1,4 @@
-# rainbow-test.py
+# nano_rainbow_test.py for use with https://github.com/peterhinch/micropython-nano-gui/
 # Sanity check rotation and colors
 
 from color_setup import ssd  # Create a display instance
