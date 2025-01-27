@@ -15,7 +15,10 @@ Grayscale/Greyscale
 
 Color 8-bit (not 16-bit)
 
+    py -3 img_cvt.py -d None images/Philips_PM5544.png fullscreen.bin
     py -3 img_cvt.py images/Philips_PM5544.png fullscreen.bin
+
+For files already in the correct dimensions, no dithering gives better results.
 
 """
 
