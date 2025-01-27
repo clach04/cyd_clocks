@@ -19,6 +19,8 @@ fn = "fullscreen.bin"  # Image created by `img_cvt.py`
 # The following line is required if a 4-bit driver is in use
 ssd.greyscale(True)  # NOTE if omitted, will get some colors - pallete undefined?
 with open(fn, "rb") as f:
-    _ = f.read(4)  # Read and discard rows and cols
+    _ = f.read(4)  # Read and discard rows and cols ... or
+    #rows = int.from_bytes(f.read(2), "big")
+    #cols = int.from_bytes(f.read(2), "big")
     f.readinto(ssd.mvb)  # Read the image into the frame buffer
 refresh(ssd)
