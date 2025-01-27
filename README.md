@@ -48,13 +48,14 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
   * [color_setup.py](https://github.com/clach04/cyd_clocks/blob/main/color_setup.py) - setup/config for using CYD1 and CYD2 with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui - see https://github.com/peterhinch/micropython-nano-gui/blob/master/setup_examples/ili9341_esp32_2432S028r.py
       * use with demos like gui.demos.aclock_large - https://github.com/peterhinch/micropython-nano-gui/blob/master/gui/demos/aclock_large.py
       * nano_rgb_test.py color and screen size/direction test/demo
+      * nano_rainbow_test.py - simple full screen rainbow color demo, also see rainbow_test.py
 
 ili9341 driver
 
 Needs https://github.com/rdagger/micropython-ili9341
 
   * [cyd_wrap.py](https://github.com/clach04/cyd_clocks/blob/main/cyd_wrap.py) - simple wrapper NOTE look for EDIT_ME and modify for your device
-      * [rainbow_test.py](https://github.com/clach04/cyd_clocks/blob/main/rainbow_test.py) - simple full screen rainbow color demo
+      * [rainbow_test.py](https://github.com/clach04/cyd_clocks/blob/main/rainbow_test.py) - simple full screen rainbow color demo, also see nano_rainbow_test.py
       * bitmap_fullscreen.py - load and display bitmap image "fullscreen_320x240_rgb565.raw", can be created from sample in `images` directory
       * font_clock_timer_paint.py - simple font based clock
       * cyd_demo.py - simple hardware demo. screen, RGB LED, light sensor, and touch screen
