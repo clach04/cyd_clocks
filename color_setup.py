@@ -1,4 +1,5 @@
-# CYD settings/config/setup for micropython-nano-gui
+# CYD (CYD1 and CYD2) settings/config/setup for micropython-nano-gui
+# https://github.com/peterhinch/micropython-nano-gui/blob/master/setup_examples/ili9341_esp32_2432S028r.py
 # based on https://github.com/peterhinch/micropython-nano-gui/blob/master/setup_examples/ili9341_esp32.py
 # color_setup.py Customise for your hardware config
 
@@ -55,13 +56,15 @@ spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))
 number_of_usb_ports = 1
 number_of_usb_ports = 2
 if number_of_usb_ports == 1:
-    # CYD / CYD1 NOTE not working properly yet, flipped or mirrored - unclear which
+    # CYD / CYD1
+    # landscape - (0, 0) is top left hand corner
+    #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, usd=True)  # CYD1 working landscape mode
     default_mod = None
     default_bgr = False
     default_usd = True
-    height, width = 240, 320
 else:  # if number_of_usb_ports == 2:
     # CYD2
+    # landscape
     # NOTE on (first) init, CYD2 screen will contain static (unlike CYD1)
     #default_mod = 1  # 1, 3, 5, and 7 is GARBAGE
     #default_mod = 0  # 0  appears to be landscape mirror flipped vertically - (0, 0) is top right hand corner
@@ -69,11 +72,9 @@ else:  # if number_of_usb_ports == 2:
     #default_mod = 4  # 4 is landscape, correct! - (0, 0) is top left hand corner
     #default_mod = 6  # 4 is landscape, flipped/mirrored somehow (TBD) - (0, 0) is bottom left hand corner
     default_mod = 4  # 4 is landscape, correct! - (0, 0) is top left hand corner
-    default_bgr = True  # TODO
+    default_bgr = True
     default_usd = False
-    default_rotation = 0
-    # landscape
-    height, width = 240, 320
+height, width = 240, 320
 
 
 ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=height, width=width, usd=default_usd, mod=default_mod, bgr=default_bgr)
