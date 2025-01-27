@@ -49,6 +49,7 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
       * use with demos like gui.demos.aclock_large - https://github.com/peterhinch/micropython-nano-gui/blob/master/gui/demos/aclock_large.py
       * nano_rgb_test.py color and screen size/direction test/demo
       * nano_rainbow_test.py - simple full screen rainbow color demo, also see rainbow_test.py
+      * nano_bitmap_fullscreen.py - load and display bitmap image "fullscreen.bin", also see bitmap_fullscreen.py
 
 ili9341 driver
 
@@ -56,7 +57,7 @@ Needs https://github.com/rdagger/micropython-ili9341
 
   * [cyd_wrap.py](https://github.com/clach04/cyd_clocks/blob/main/cyd_wrap.py) - simple wrapper NOTE look for EDIT_ME and modify for your device
       * [rainbow_test.py](https://github.com/clach04/cyd_clocks/blob/main/rainbow_test.py) - simple full screen rainbow color demo, also see nano_rainbow_test.py
-      * bitmap_fullscreen.py - load and display bitmap image "fullscreen_320x240_rgb565.raw", can be created from sample in `images` directory
+      * bitmap_fullscreen.py - load and display bitmap image "fullscreen_320x240_rgb565.raw", can be created from sample in `images` directory, also see nano_bitmap_fullscreen.py
       * font_clock_timer_paint.py - simple font based clock
       * cyd_demo.py - simple hardware demo. screen, RGB LED, light sensor, and touch screen
 
