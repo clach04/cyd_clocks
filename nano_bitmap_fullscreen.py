@@ -1,9 +1,13 @@
 """working for gray/grey scale 4-bit BUT not with 8-bit driver
 working color 8-bit with 8-bit driver ONLY.
 
-Not working for color with 4-bit driver, end up with garbage.
+Not working for color with 4-bit driver, end up with garbage. Suspect need to correct pixel format, img_cvt.py only seems to support 4-bit for non-color (or load lines in correct order due to display rotation?)
 
-Suspect need to correct palette (or load lines in correct order due to display rotation?)
+Memory note, error allocating buf/mvb:
+
+    MemoryError: memory allocation failed, allocating 76800 bytes
+
+on driver init for 8-bit can happen when something else has loaded first. For example main.py and/or boot.py
 
 Grayscale/Greyscale
 

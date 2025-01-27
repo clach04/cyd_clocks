@@ -31,7 +31,7 @@ import gc
 # *** Choose your color display driver here ***
 # ili9341 specific driver
 #from drivers.ili93xx.ili9341 import ILI9341 as SSD  # 4-bit buffer, also supports grayscale/greyscale
-from drivers.ili93xx.ili9341_8bit import ILI9341 as SSD  # 8-bit buffer (needs more 2x memory of 4-bit driver) - does not support grayscale/greyscale, for non-color use matching r, g, b values
+from drivers.ili93xx.ili9341_8bit import ILI9341 as SSD  # 8-bit buffer (needs more 2x memory of 4-bit driver) - does not support grayscale/greyscale, for non-color use matching r, g, b values.
 
 PIN_sck = 14
 PIN_mosi = 13
@@ -78,6 +78,7 @@ else:  # if number_of_usb_ports == 2:
 height, width = 240, 320
 
 
+# If below fails with memory errors, check main.py/boot.py (are empty) and re-run
 ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=height, width=width, usd=default_usd, mod=default_mod, bgr=default_bgr)
 
 ############
