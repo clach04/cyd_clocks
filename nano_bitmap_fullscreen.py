@@ -3,10 +3,10 @@
 Not working for color
 
 end up with garbage.
-Suspect need to load lines in correct order due to display rotation
+Suspect need to correct palette (or load lines in correct order due to display rotation?)
 
 
-    py -3 img_cvt.py Philips_PM5544.pgm fullscreen.bin
+    py -3 img_cvt.py images/Philips_PM5544.pgm fullscreen.bin
 
 """
 
