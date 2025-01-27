@@ -6,7 +6,7 @@ from gui.core.colors import create_color, RED, YELLOW, GREEN, BLUE, MAGENTA as P
 from gui.core.nanogui import refresh
 
 
-ORANGE = create_color(12, 255,128,0)
+ORANGE = create_color(12, 255, 128, 0)
 
 
 def display_function():
