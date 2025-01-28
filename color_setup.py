@@ -48,9 +48,11 @@ prst = Pin(PIN_rst, Pin.OUT, value=1)
 
 # Kept as ssd to maintain compatability
 gc.collect()  # Precaution before instantiating framebuf
+
 #spi = SPI(1, 40_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi), miso=Pin(12))
-#spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi), miso=Pin(12))
-spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))
+#spi = SPI(1, 40_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))  # default miso. 40Mhz out of spec but seems to work fine
+spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))  # default miso
+
 
 # TODO consider using const?
 # EDIT_ME!
