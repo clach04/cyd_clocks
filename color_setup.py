@@ -7,7 +7,8 @@
 # Copyright (c) 2020 Peter Hinch
 
 # As written, supports:
-# ili9341 240x320 displays on ESP32
+# ili9341 240x320 displays on Sunton ESP32-2432S028, also known as CYD
+# See https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/ for more details
 # Edit the driver import for other displays.
 
 # Demo of initialisation procedure designed to minimise risk of memory fail
@@ -18,9 +19,9 @@
 # ESP   SSD
 # 3v3   Vin
 # Gnd   Gnd
-# IO25  DC
-# IO26  CS
-# IO27  Rst
+# IO02  DC
+# IO15  CS
+# IO15  Rst
 # IO14  CLK  Hardware SPI1
 # IO13  DATA (AKA SI MOSI)
 
@@ -35,7 +36,7 @@ from drivers.ili93xx.ili9341_8bit import ILI9341 as SSD  # 8-bit buffer (needs m
 
 PIN_sck = 14
 PIN_mosi = 13
-# TODO miso - doesn't seem to be needed
+# miso - doesn't need to be explictly set
 PIN_dc = 2
 PIN_cs = 15
 PIN_rst = 15
