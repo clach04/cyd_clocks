@@ -49,6 +49,7 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
       * use with demos like gui.demos.aclock_large - https://github.com/peterhinch/micropython-nano-gui/blob/master/gui/demos/aclock_large.py
       * nano_rgb_test.py color and screen size/direction test/demo
       * nano_rainbow_test.py - simple full screen rainbow color demo, also see rainbow_test.py
+      * nano_helloworld.py - text/font demo - uses framebuffer and nano labels
       * nano_bitmap_fullscreen.py - load and display bitmap image "fullscreen.bin", also see bitmap_fullscreen.py
       * nano_wifi_clock_timer.py - incomplete WIP nano version of wifi_clock_timer.py
 
