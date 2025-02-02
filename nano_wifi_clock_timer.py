@@ -1,4 +1,10 @@
 # nano_wifi_clock_timer.py
+"""This is not as reliable as the raw driver version.
+
+Often get network issues, failure to sync RTC.
+Sometimes get MicroPython crashes when connecting to WiFi with a panic and crashdump
+Using 4-bit driver helps reduce chance, as does garbage collection
+"""
 
 import gc
 import machine
