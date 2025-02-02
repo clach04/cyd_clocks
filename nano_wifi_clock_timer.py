@@ -150,7 +150,11 @@ def rtc_update():
             year, month, day, hour, min, sec, microseconds = map(int, parsed['datetime'][:-len("-12:30")].replace('T', '-').replace(':', '-').replace('.', '-').split('-'))
             rtc.datetime((year, month, day, parsed["day_of_week"] - 1, hour, min, sec, microseconds))
             return True
-    except:  # yep bare
+        print('response.status_code %r' % response.status_code)
+        print('response %r' % response)
+        print('response.content %r' % response.content)
+    except Exception as ex_info:  # yep bare
+        print(ex_info)
         return False
     return False
 
@@ -164,14 +168,16 @@ try:
         ssd.text('ssid: %s' % ssid, 0, 18, COLOR_WHITE)
         refresh(ssd)
         wlan = None
+        wfm = WifiManager(ssid=ssid)
         while wlan is None:
             print("Trying to start WiFi network connection.")
-            wlan = WifiManager(ssid=ssid).get_connection()
+            wlan = wfm.get_connection()
         print("Clock connected to WiFi network")
         print("%r" % (wlan.ifconfig(),))  # IP address, subnet mask, gateway, DNS server
         print("%r" % (wlan.config('mac'),))  # MAC in bytes
         print("SSID: %r" % (wlan.config('ssid'),))
         print("hostname: %r" % (network.hostname(),))
+        del(wfm)
 
         ssd.text('Connected %s Sync RTC' % wlan.config('ssid'), 0, 24, COLOR_WHITE)
         refresh(ssd)
