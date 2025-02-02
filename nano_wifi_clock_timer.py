@@ -74,8 +74,7 @@ def display_clock():
         date_time.value(date_str)
 
         """
-        # TODO add code to record/display how long a frame takes to paint
-
+        # About 4-5 FPS with date and time in arial35
         # simple FPS math. Consider implementing a clone of pygame.time.Clock() which has a tick()/get_fps() interface https://www.pygame.org/docs/ref/time.html#pygame.time.Clock.get_fps - below is probably faster?
         # Also see lvgl macro define LV_USE_PERF_MONITOR
         fps_counter += 1
@@ -85,10 +84,12 @@ def display_clock():
             fps_str = "FPS: %d" % (int(fps),)
             print(fps_str)  # to serial
             print((fps_x, fps_y, fps_str, COLOR_WHITE))  # to serial
-            #ssd.text(fps_x, fps_y, fps_str, COLOR_WHITE)  # 8x8 built in font  - unsure how to pass in 8x8 font into Label widget
+            # need to blank out fps text otherwise will overpaint
+            ssd.rect(fps_x, fps_y, 8 * 8, 15, BLUE, True)
+            ssd.text(fps_str, fps_x, fps_y, COLOR_WHITE)  # 8x8 built in font  - unsure how to pass in 8x8 font into Label widget
             #ssd.text(250, 240 - 8, 'hello')  # 8x8 built in font  - unsure how to pass in 8x8 font into Label widget
             #ssd.text(0, 10, 'Trying to start WiFi', COLOR_WHITE)  # 8x8 built in font
-            ssd.text(0, 10, 'Hellow')  # 8x8 built in font - fails here (works on init) with; TypeError: can't convert 'int' object to str implicitly
+            #WRONG PARAM ORDER ssd.text(0, 10, 'Hellow')  # 8x8 built in font - fails here (works on init) with; TypeError: can't convert 'int' object to str implicitly
             fps_counter = 0  # reset
             start_time = timer_function()
         """
@@ -147,8 +148,8 @@ try:
     else:
         ssid = 'SClock'
         network.hostname(ssid.lower())  # TODO + last 4 digits of mac?
-        ssd.text(0, 10, 'Trying to start WiFi', COLOR_WHITE)  # 8x8 built in font
-        ssd.text(0, 18, 'ssid: %s' % ssid, COLOR_WHITE)
+        ssd.text('Trying to start WiFi', 0, 10, COLOR_WHITE)  # 8x8 built in font
+        ssd.text('ssid: %s' % ssid, 0, 18, COLOR_WHITE)
         refresh(ssd)
         wlan = None
         while wlan is None:
@@ -160,14 +161,13 @@ try:
         print("SSID: %r" % (wlan.config('ssid'),))
         print("hostname: %r" % (network.hostname(),))
 
-        ssd.text(0, 24, 'Connected %s Sync RTC' % wlan.config('ssid'), COLOR_WHITE)
+        ssd.text('Connected %s Sync RTC' % wlan.config('ssid'), 0, 24, COLOR_WHITE)
         refresh(ssd)
         if rtc_update():
-            display.clear()
+            refresh(ssd, True)  # Initialise and clear display.
         else:
-            display.clear()
-            display.draw_text8x8(0, 10, 'Failed to get and sync time', COLOR_BLACK, COLOR_WHITE)
-            ssd.text(0, 10, 'Failed to get and sync time', COLOR_WHITE)
+            refresh(ssd, True)  # Initialise and clear display.
+            ssd.text('Failed to get and sync time', 0, 10, COLOR_WHITE)
         # now use wlan.ABC to check status, etc.
 
     """
