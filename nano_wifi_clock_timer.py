@@ -183,4 +183,4 @@ try:
 finally:
     # Leave screen alone/on for visual inspection - uncomment below to change that
     pass
-    #TODO stop and delete one_second_timer
+    one_second_timer.deinit()  # stop updating the clock/time
