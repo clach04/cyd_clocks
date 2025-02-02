@@ -8,7 +8,9 @@ from gui.core.nanogui import refresh
 #import gui.fonts.arial10 as font
 #import gui.fonts.arial35 as font
 import gui.fonts.freesans20 as font
-from gui.widgets.label import Label
+from gui.widgets.label import Label, ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTER
+
+
 from gui.core.writer import CWriter  # NOTE On a monochrome display Writer is more efficient than CWriter.
 
 refresh(ssd, True)  # Initialise and clear display.
@@ -28,16 +30,16 @@ fg_color = WHITE
 # nano GUI
 CWriter.set_textpos(ssd, 0, 0)  # In case previous code have altered it
 wri = CWriter(ssd, font, fgcolor=fg_color, bgcolor=bg_color, verbose=False)
-wri.set_clip(True, True, False)
+wri.set_clip(row_clip=True, col_clip=True, wrap=False)  # Clip to screen, no wrap
 
 label_goodbye = Label(wri, 200, 2, 35)
 label_goodbye.value('Goodbye World nano-GUI')
 refresh(ssd)  # display to screen
 
 
-#bordered_writer = CWriter(ssd, font, fgcolor=RED, bgcolor=bg_color, verbose=False)
-#bordered_writer.set_clip(True, True, False)
+# Bordered text demos
 
+# 35 pixels set for length, which will be the width/length of the border - also used for alignment
 
 #                     writer, row, col, text, invert=False, fgcolor=None, bgcolor=None, bdcolor=False, align=ALIGN_LEFT)
 #label_bordered = Label(wri, 100, 2, 35, bdcolor=True)  # this doesn't work
@@ -46,6 +48,13 @@ label_bordered = Label(wri, 100, 2, 35, bdcolor=None)  # this is what the docs s
 label_bordered.value('bordered text from nano-GUI')
 refresh(ssd)  # display to screen
 
-label_bordered_green = Label(wri, 150, 2, 35, bdcolor=GREEN)
-label_bordered_green.value('green bordered text from nano-GUI')
+#label_bordered_green = Label(wri, 150, 2, 35, bdcolor=GREEN)
+label_bordered_green = Label(wri, 150, 2, 'green bordered text from nano-GUI', bdcolor=GREEN)
+#label_bordered_green.value('green bordered text from nano-GUI')
+refresh(ssd)  # display to screen
+
+
+red_text_box_width = ssd.width - 4  # 2 pixels per side?
+label_bordered_red = Label(wri, 70, 2, red_text_box_width, fgcolor=RED, bdcolor=RED, align=ALIGN_RIGHT)
+label_bordered_red.value('red bordered text from nano-GUI')
 refresh(ssd)  # display to screen
