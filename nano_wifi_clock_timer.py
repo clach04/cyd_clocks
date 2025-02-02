@@ -197,6 +197,27 @@ try:
     """
     refresh(ssd)
 
+    """
+    if hasattr(ssd, 'lut'):
+        # for CYD - this is 4-bit, could be grayscale (14 colors) or color with a 16 color palette - self.mode == framebuf.GS4_HMSB
+        fn = "fullscreen_4bit.bin"
+        # Either:
+        # set palette manually or:
+        #ssd.greyscale(True)
+    else:
+        # for CYD - this is 8-bit - ssd.mode == framebuf.GS8
+        fn = "fullscreen_8bit.bin"
+    print('Using filename %s' % fn)
+    # The following line is required if a 4-bit driver is in use
+    #ssd.greyscale(True)  # NOTE if omitted, will get some colors - pallete undefined? NOTE2 - MISSING from 8-bit driver
+    with open(fn, "rb") as f:
+        _ = f.read(4)  # Read and discard rows and cols ... or
+        #rows = int.from_bytes(f.read(2), "big")
+        #cols = int.from_bytes(f.read(2), "big")
+        f.readinto(ssd.mvb)  # Read the image into the frame buffer
+    #refresh(ssd)
+    """
+
     display_clock()
 finally:
     # Leave screen alone/on for visual inspection - uncomment below to change that
