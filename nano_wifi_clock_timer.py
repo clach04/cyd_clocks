@@ -41,6 +41,7 @@ COLOR_BLACK = BLACK
 
 fps_counter = 0
 start_time = timer_function()
+one_second_timer = machine.Timer(0)  # NOTE esp32 only 4 timers
 def display_clock():
     bg_color = COLOR_WHITE
     fg_color = COLOR_BLACK
@@ -71,6 +72,7 @@ def display_clock():
         date_str = '%04d-%02d-%02d' % (l[0], l[1], l[2])
         label_time.value(time_str)
         date_time.value(date_str)
+
         """
         # TODO add code to record/display how long a frame takes to paint
 
@@ -81,14 +83,24 @@ def display_clock():
             fps = fps_counter / (timer_function() - start_time)  # NOTE faster to call again than to store and use local variable
             #fps_str = "FPS: %f" % (fps,)
             fps_str = "FPS: %d" % (int(fps),)
-            #print(fps_str)  # to serial
-            display.draw_text8x8(fps_x, fps_y, fps_str, COLOR_WHITE, COLOR_BLACK)
+            print(fps_str)  # to serial
+            print((fps_x, fps_y, fps_str, COLOR_WHITE))  # to serial
+            #ssd.text(fps_x, fps_y, fps_str, COLOR_WHITE)  # 8x8 built in font  - unsure how to pass in 8x8 font into Label widget
+            #ssd.text(250, 240 - 8, 'hello')  # 8x8 built in font  - unsure how to pass in 8x8 font into Label widget
+            #ssd.text(0, 10, 'Trying to start WiFi', COLOR_WHITE)  # 8x8 built in font
+            ssd.text(0, 10, 'Hellow')  # 8x8 built in font - fails here (works on init) with; TypeError: can't convert 'int' object to str implicitly
             fps_counter = 0  # reset
             start_time = timer_function()
         """
+
         refresh(ssd)
 
-    one_second_timer = machine.Timer(0)  # NOTE esp32 only 4 timers
+
+    '''
+    while True:
+        paint_time(None)  # run in a loop to measure FPS
+    '''
+
 
     paint_time(one_second_timer)  # could be upto 2 secs before next paint?
     # try and figure out exactly when the next new whole-second starts
@@ -158,14 +170,17 @@ try:
             ssd.text(0, 10, 'Failed to get and sync time', COLOR_WHITE)
         # now use wlan.ABC to check status, etc.
 
+    """
     ssd.text('MicroPython!', 0, 0, WHITE)
     ssd.text('MicroPython!', 0, 18, WHITE)
     ssd.text('MicroPython!', 0, 18*2, WHITE)
     ssd.text('MicroPython!', 0, 18*3, WHITE)
     ssd.text('MicroPython!', 0, 18*4, WHITE)
+    """
     refresh(ssd)
 
     display_clock()
 finally:
     # Leave screen alone/on for visual inspection - uncomment below to change that
     pass
+    #TODO stop and delete one_second_timer
