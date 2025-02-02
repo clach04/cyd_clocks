@@ -13,7 +13,10 @@ import gui.fonts.arial35 as font
 #import gui.fonts.freesans20 as font
 from gui.widgets.label import Label
 
-#from microwifimanager.manager import WifiManager
+try:
+    from microwifimanager.manager import WifiManager
+except:
+    WifiManager = None
 
 refresh(ssd, True)  # Initialise and clear display.
 
@@ -39,7 +42,6 @@ COLOR_BLACK = BLACK
 fps_counter = 0
 start_time = timer_function()
 def display_clock():
-    print('DEBUG start display_clock()')
     bg_color = COLOR_WHITE
     fg_color = COLOR_BLACK
     x, y = 0, 0
@@ -60,9 +62,7 @@ def display_clock():
     #date_time = Label(wri, xpos, ypos, text=35, fgcolor=fg_color, bgcolor=bg_color)  # text is pixel width? (or string, '1234-12-12') seems to have no effect
     date_time = Label(wri, xpos, ypos, text='1234-12-12', fgcolor=fg_color, bgcolor=bg_color)  # text is pixel width? (or string, )
 
-    print('DEBUG pre func def paint_time')
     def paint_time(timer_object):  # TODO should micropython.schedule() be used?
-        print('DEBUG start paint_time()')
         global fps_counter
         global start_time
 
@@ -87,7 +87,6 @@ def display_clock():
             start_time = timer_function()
         """
         refresh(ssd)
-        print('DEBUG end paint_time()')
 
     one_second_timer = machine.Timer(0)  # NOTE esp32 only 4 timers
 
@@ -131,32 +130,41 @@ def rtc_update():
     return False
 
 try:
-    print('DEBUG start of try')
-    """
-    ssid = 'SClock'
-    network.hostname(ssid.lower())  # TODO + last 4 digits of mac?
-    display.draw_text8x8(0, 10, 'Trying to start WiFi', COLOR_WHITE, COLOR_BLACK)
-    display.draw_text8x8(0, 18, 'ssid: %s' % ssid, COLOR_WHITE, COLOR_BLACK)
-    wlan = None
-    while wlan is None:
-        print("Trying to start WiFi network connection.")
-        wlan = WifiManager(ssid=ssid).get_connection()
-    print("Clock connected to WiFi network")
-    print("%r" % (wlan.ifconfig(),))  # IP address, subnet mask, gateway, DNS server
-    print("%r" % (wlan.config('mac'),))  # MAC in bytes
-    print("SSID: %r" % (wlan.config('ssid'),))
-    print("hostname: %r" % (network.hostname(),))
-
-    display.draw_text8x8(0, 24, 'Connected %s Sync RTC' % wlan.config('ssid'), COLOR_WHITE, COLOR_BLACK)
-    if rtc_update():
-        display.clear()
+    if not WifiManager:
+        ssd.text('no WifiManager!', 0, 18*5, WHITE)
     else:
-        display.clear()
-        display.draw_text8x8(0, 10, 'Failed to get and sync time', COLOR_BLACK, COLOR_WHITE)
-    # now use wlan.ABC to check status, etc.
-    """
+        ssid = 'SClock'
+        network.hostname(ssid.lower())  # TODO + last 4 digits of mac?
+        ssd.text(0, 10, 'Trying to start WiFi', COLOR_WHITE)  # 8x8 built in font
+        ssd.text(0, 18, 'ssid: %s' % ssid, COLOR_WHITE)
+        refresh(ssd)
+        wlan = None
+        while wlan is None:
+            print("Trying to start WiFi network connection.")
+            wlan = WifiManager(ssid=ssid).get_connection()
+        print("Clock connected to WiFi network")
+        print("%r" % (wlan.ifconfig(),))  # IP address, subnet mask, gateway, DNS server
+        print("%r" % (wlan.config('mac'),))  # MAC in bytes
+        print("SSID: %r" % (wlan.config('ssid'),))
+        print("hostname: %r" % (network.hostname(),))
 
-    print('DEBUG pre; display_clock()')
+        ssd.text(0, 24, 'Connected %s Sync RTC' % wlan.config('ssid'), COLOR_WHITE)
+        refresh(ssd)
+        if rtc_update():
+            display.clear()
+        else:
+            display.clear()
+            display.draw_text8x8(0, 10, 'Failed to get and sync time', COLOR_BLACK, COLOR_WHITE)
+            ssd.text(0, 10, 'Failed to get and sync time', COLOR_WHITE)
+        # now use wlan.ABC to check status, etc.
+
+    ssd.text('MicroPython!', 0, 0, WHITE)
+    ssd.text('MicroPython!', 0, 18, WHITE)
+    ssd.text('MicroPython!', 0, 18*2, WHITE)
+    ssd.text('MicroPython!', 0, 18*3, WHITE)
+    ssd.text('MicroPython!', 0, 18*4, WHITE)
+    refresh(ssd)
+
     display_clock()
 finally:
     # Leave screen alone/on for visual inspection - uncomment below to change that
