@@ -13,10 +13,12 @@ Grayscale/Greyscale
 
     py -3 img_cvt.py images/Philips_PM5544.pgm fullscreen.bin
 
-Color 8-bit (not 16-bit)
+Color 8-bit driver (not 16-bit)
 
-    py -3 img_cvt.py -d None images/Philips_PM5544.png fullscreen.bin
-    py -3 img_cvt.py images/Philips_PM5544.png fullscreen.bin
+    py -3 img_cvt.py -d None images/philips_pm5544.ppm fullscreen_8bit.bin
+    py -3 img_cvt.py         images/philips_pm5544.ppm fullscreen_8bit.bin
+
+    py -3 img_cvt.py         images/philips_pm5544.pgm fullscreen_4bit.bin
 
 For files already in the correct dimensions, no dithering gives better results.
 
@@ -29,12 +31,15 @@ from gui.core.nanogui import refresh
 refresh(ssd)  # Initialise display.
 if hasattr(ssd, 'lut'):
     # for CYD - this is 4-bit, could be grayscale (14 colors) or color with a 16 color palette - self.mode == framebuf.GS4_HMSB
-    pass
+    fn = "fullscreen_4bit.bin"  # Image created by `img_cvt.py`
+    # Either:
+    # set palette manually or:
+    #ssd.greyscale(True)
 else:
     # for CYD - this is 8-bit - ssd.mode == framebuf.GS8
-    pass
+    fn = "fullscreen_8bit.bin"  # Image created by `img_cvt.py`
 
-fn = "fullscreen.bin"  # Image created by `img_cvt.py`
+print('Using filename %s' % fn)
 # The following line is required if a 4-bit driver is in use
 #ssd.greyscale(True)  # NOTE if omitted, will get some colors - pallete undefined? NOTE2 - MISSING from 8-bit driver
 with open(fn, "rb") as f:
