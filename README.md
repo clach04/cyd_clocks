@@ -50,6 +50,7 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
       * nano_rgb_test.py color and screen size/direction test/demo
       * nano_rainbow_test.py - simple full screen rainbow color demo, also see rainbow_test.py
       * nano_bitmap_fullscreen.py - load and display bitmap image "fullscreen.bin", also see bitmap_fullscreen.py
+      * nano_wifi_clock_timer.py - incomplete WIP nano version of wifi_clock_timer.py
 
 ili9341 driver
 
