@@ -1,5 +1,6 @@
 # nano_wifi_clock_timer.py
 
+import gc
 import machine
 import network
 import requests
@@ -13,9 +14,14 @@ import gui.fonts.arial35 as font
 #import gui.fonts.freesans20 as font
 from gui.widgets.label import Label
 
+print('gc.mem_free %r - pre-collect' % (gc.mem_free(),))
+gc.collect()
+print('gc.mem_free %r - post-collect' % (gc.mem_free(),))
 try:
+    # NOTE this may fail due to lack of memory
     from microwifimanager.manager import WifiManager
-except:
+#except:
+except ImportError:
     WifiManager = None
 
 refresh(ssd, True)  # Initialise and clear display.
