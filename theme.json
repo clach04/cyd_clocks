@@ -1,0 +1,25 @@
+{
+    "FONT_COLOR": "255, 255, 255",
+
+    "DATE": {
+        "FORMAT": "YYYY-MM-dd",
+        "ALIGNMENT": "RIGHT",
+
+        "WIDTH": 260,
+        "X": 30,
+        "Y": 10,
+
+        "FONT_COLOR": "0, 0, 255"
+    },
+    "TIME": {
+        "WIDTH": 251,
+        "X": 33,
+        "Y": 130,
+
+        "#FORMAT": "HH:mm",
+        "FORMAT": "HH:mm:ss",
+        "ALIGNMENT": "CENTER",
+
+        "FONT_COLOR": "0, 255, 0"
+    }
+}
