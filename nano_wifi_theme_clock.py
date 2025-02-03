@@ -82,6 +82,7 @@ def display_clock(theme_config):
 
     fn = theme_config.get("BACKGROUND")  # background image filename in "raw" format, the driver dictates the format (which is typically loaded first)
     if fn:
+        # TODO take filename and append "_4bit.bin" / "_8bit.bin" depending on hasattr(ssd, 'lut')? or ssd.mode
         print('Using filename %s' % fn)
         # The following line is required if a 4-bit driver is in use
         #ssd.greyscale(True)  # NOTE if omitted, will get some colors - pallete undefined? NOTE2 - MISSING from 8-bit driver
@@ -95,6 +96,7 @@ def display_clock(theme_config):
 
     # TODO background color(s) - "BACKGROUND_COLOR"
     # TODO palette (from background image - "BACKGROUND" ? or new config entries)
+    # TODO grayscale true/false option instead of palette
     # TODO background color(s) - "INTERVAL"
     date_format = theme_config["DATE"].get("FORMAT", "YYYY-MM-dd")
     time_format = theme_config["TIME"].get("FORMAT", "HH:mm:ss")
