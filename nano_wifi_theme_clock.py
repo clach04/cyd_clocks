@@ -28,7 +28,7 @@ print('gc.mem_free %r - pre-collect' % (gc.mem_free(),))
 gc.collect()
 print('gc.mem_free %r - post-collect' % (gc.mem_free(),))
 try:
-    #raise ImportError  # DEBUG to save time and avoid problems, see comment at head
+    raise ImportError  # DEBUG to save time and avoid problems, see comment at head
     # NOTE this may fail due to lack of memory
     from microwifimanager.manager import WifiManager
 #except:
