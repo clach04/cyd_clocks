@@ -61,6 +61,15 @@ def str2rgb(in_str):
     r, g, b = map(int, in_str.split(','))  # assume int works with spaces
     return r, g, b
 
+# NOTE less memory if just try and open file and deal with errors
+def file_or_dir_exists(filename):
+    try:
+        os.stat(filename)
+        return True
+    except OSError:
+        return False
+
+
 fps_counter = 0
 start_time = timer_function()
 one_second_timer = machine.Timer(0)  # NOTE esp32 only 4 timers
@@ -69,7 +78,19 @@ def display_clock(theme_config):
     theme_config["DATE"] = theme_config.get("DATE", {})
     theme_config["TIME"] = theme_config.get("TIME", {})
 
-    # TODO background image - "BACKGROUND"
+    fn = theme_config.get("BACKGROUND")  # background image filename in "raw" format, the driver dictates the format (which is typically loaded first)
+    if fn:
+        print('Using filename %s' % fn)
+        # The following line is required if a 4-bit driver is in use
+        #ssd.greyscale(True)  # NOTE if omitted, will get some colors - pallete undefined? NOTE2 - MISSING from 8-bit driver
+        with open(fn, "rb") as f:
+            _ = f.read(4)  # Read and discard rows and cols ... or
+            #rows = int.from_bytes(f.read(2), "big")
+            #cols = int.from_bytes(f.read(2), "big")
+            f.readinto(ssd.mvb)  # Read the image into the frame buffer
+        refresh(ssd)
+
+
     # TODO background color(s) - "BACKGROUND_COLOR"
     # TODO palette (from background image - "BACKGROUND" ? or new config entries)
     # TODO background color(s) - "INTERVAL"
@@ -254,14 +275,6 @@ try:
         f.readinto(ssd.mvb)  # Read the image into the frame buffer
     #refresh(ssd)
     """
-
-    # NOTE less memory if just try and open file and deal with errors
-    def file_or_dir_exists(filename):
-        try:
-            os.stat(filename)
-            return True
-        except OSError:
-            return False
 
     theme_filename = "theme.json"
     #if not os.path.exists(theme_filename):

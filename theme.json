@@ -1,4 +1,7 @@
 {
+    "#BACKGROUND": "fullscreen_4bit.bin",
+    "BACKGROUND": "fullscreen_8bit.bin",
+
     "FONT_COLOR": "255, 255, 255",
 
     "DATE": {
