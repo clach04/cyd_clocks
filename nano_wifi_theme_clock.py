@@ -3,6 +3,8 @@
 
 Often get network issues, failure to sync RTC.
 Sometimes get MicroPython crashes when connecting to WiFi with a panic and crashdump
+CONSISTENTLY failing with: RuntimeError: Wifi Unknown Error 0x0101
+on line 14 in wifi manager; wlan_ap = network.WLAN(network.AP_IF)
 Using 4-bit driver helps reduce chance, as does garbage collection
 """
 
@@ -26,7 +28,7 @@ print('gc.mem_free %r - pre-collect' % (gc.mem_free(),))
 gc.collect()
 print('gc.mem_free %r - post-collect' % (gc.mem_free(),))
 try:
-    raise ImportError  # DEBUG to save time
+    #raise ImportError  # DEBUG to save time and avoid problems, see comment at head
     # NOTE this may fail due to lack of memory
     from microwifimanager.manager import WifiManager
 #except:
