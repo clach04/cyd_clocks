@@ -82,7 +82,15 @@ def display_clock(theme_config):
 
     fn = theme_config.get("BACKGROUND")  # background image filename in "raw" format, the driver dictates the format (which is typically loaded first)
     if fn:
-        # TODO take filename and append "_4bit.bin" / "_8bit.bin" depending on hasattr(ssd, 'lut')? or ssd.mode - alternative loading display after theme loading
+        # take filename if missing and append "_4bit.bin" / "_8bit.bin" depending on drivver (or ssd.mode?) - alternative loading display after theme loading
+        if not file_or_dir_exists(fn):
+            if hasattr(ssd, 'lut'):
+                fn = fn + "_4bit.bin"
+                # Either:
+                # set palette manually or:
+                #ssd.greyscale(True)
+            else:
+                fn = fn + "_8bit.bin"
         print('Using filename %s' % fn)
         # The following line is required if a 4-bit driver is in use
         #ssd.greyscale(True)  # NOTE if omitted, will get some colors - pallete undefined? NOTE2 - MISSING from 8-bit driver
