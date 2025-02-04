@@ -18,6 +18,7 @@ Color 8-bit driver (not 16-bit)
     py -3 img_cvt.py -d None images/philips_pm5544.ppm fullscreen_8bit.bin
     py -3 img_cvt.py         images/philips_pm5544.ppm fullscreen_8bit.bin
 
+    py -3 img_cvt.py -d None images/philips_pm5544.pgm fullscreen_4bit.bin
     py -3 img_cvt.py         images/philips_pm5544.pgm fullscreen_4bit.bin
 
 For files already in the correct dimensions, no dithering gives better results.
