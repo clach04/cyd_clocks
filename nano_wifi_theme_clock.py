@@ -20,7 +20,7 @@ from color_setup import ssd  # Create a display instance
 from gui.core.colors import create_color, RED, BLUE, GREEN, WHITE, BLACK
 from gui.core.nanogui import refresh
 from gui.core.writer import CWriter
-import gui.fonts.arial35 as font
+#import gui.fonts.arial35 as font
 #import gui.fonts.freesans20 as font
 from gui.widgets.label import Label, ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTER
 
@@ -110,6 +110,16 @@ def display_clock(theme_config):
     # TODO hide - "SHOW"
     date_format = theme_config["DATE"].get("FORMAT", "YYYY-MM-dd")
     time_format = theme_config["TIME"].get("FORMAT", "HH:mm:ss")
+
+    font_size = theme_config.get("FONT_SIZE", 35)  # consider using 8x8 font BUT need different font API call...
+    font_name = theme_config.get("FONT", "arial")  # consider using 8x8 font BUT need different font API call...
+    font_name = font_name + str(font_size)
+
+    try:
+        font = __import__(font_name, globals(), locals(), ['version',], 0)
+    except ImportError:
+        font = __import__('gui.fonts.' + font_name, globals(), locals(), ['version',], 0)
+        #TODO default if this is missing too?
 
     default_color_str = theme_config.get("FONT_COLOR", "255, 255, 255")
     r, g, b = str2rgb(default_color_str)
