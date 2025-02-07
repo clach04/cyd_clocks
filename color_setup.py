@@ -31,8 +31,9 @@ import gc
 
 # *** Choose your color display driver here ***
 # ili9341 specific driver
-#from drivers.ili93xx.ili9341 import ILI9341 as SSD  # 4-bit buffer, also supports grayscale/greyscale
-from drivers.ili93xx.ili9341_8bit import ILI9341 as SSD  # 8-bit buffer (needs more 2x memory of 4-bit driver) - does not support grayscale/greyscale, for non-color use matching r, g, b values.
+# CYD2 does not have enough memory on main.py for 8-bit color
+from drivers.ili93xx.ili9341 import ILI9341 as SSD  # 4-bit buffer, also supports grayscale/greyscale
+#from drivers.ili93xx.ili9341_8bit import ILI9341 as SSD  # 8-bit buffer (needs more 2x memory of 4-bit driver) - does not support grayscale/greyscale, for non-color use matching r, g, b values.
 
 PIN_sck = 14
 PIN_mosi = 13
