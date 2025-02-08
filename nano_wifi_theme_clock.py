@@ -71,6 +71,30 @@ def file_or_dir_exists(filename):
     except OSError:
         return False
 
+def time2str(time_tuple, format_str="{YYYY:04d}-{MM:02d}-{dd:02d} {HH:02d}:{mm:02d}:{ss:02d}"):
+    year, month, mday, hour, minute, second, weekday, yearday = time_tuple  # micropython time.time()
+    d = dict(
+        YYYY=year,
+        MM=month,
+        dd=mday,
+        HH=hour,
+        mm=minute,
+        ss=second
+        # TODO ? weekday, yearday
+    )
+    return format_str.format(**d)
+
+def dumb_format_converter(config_format):
+    # partial https://babel.pocoo.org/en/latest/api/dates.html support
+    # generate Python string.format() compat
+    result_format = config_format.replace('YYYY', '{YYYY:04d}')
+    result_format = result_format.replace('MM', '{MM:02d}')
+    result_format = result_format.replace('dd', '{dd:02d}')
+    result_format = result_format.replace('HH', '{HH:02d}')
+    result_format = result_format.replace('mm', '{mm:02d}')
+    result_format = result_format.replace('ss', '{ss:02d}')
+    return result_format
+
 
 fps_counter = 0
 start_time = timer_function()
@@ -110,8 +134,8 @@ def display_clock(theme_config):
     # TODO grayscale true/false option instead of palette
     # TODO refresh rate - "INTERVAL"
     # TODO hide - "SHOW"
-    date_format = theme_config["DATE"].get("FORMAT", "YYYY-MM-dd")
-    time_format = theme_config["TIME"].get("FORMAT", "HH:mm:ss")
+    date_format = dumb_format_converter(theme_config["DATE"].get("FORMAT", "YYYY-MM-dd"))
+    time_format = dumb_format_converter(theme_config["TIME"].get("FORMAT", "HH:mm:ss"))
 
     font_size = theme_config.get("FONT_SIZE", 35)  # consider using 8x8 font BUT need different font API call...
     font_name = theme_config.get("FONT", "arial")  # consider using 8x8 font BUT need different font API call...
@@ -164,8 +188,8 @@ def display_clock(theme_config):
 
         l = local_time_tuple_function()
         # TODO don't update date if not changed
-        time_str = '%02d:%02d:%02d' % (l[3], l[4], l[5])  # FIXME map time_format, currently hard coded
-        date_str = '%04d-%02d-%02d' % (l[0], l[1], l[2])  # FIXME map date_format, currently hard coded
+        time_str = time2str(l, time_format)
+        date_str = time2str(l, date_format)
         label_time.value(time_str)
         date_time.value(date_str)
 
