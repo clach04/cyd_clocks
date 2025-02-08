@@ -28,6 +28,7 @@
         "#FORMAT": "long",
         "#FORMAT": "full",
         "#FORMAT": "HH:mm",
+        "#FORMAT": "{YYYY:04d}-{MM:02d}-{dd:02d} {HH:02d}:{mm:02d}:{ss:02d}",
         "FORMAT": "HH:mm:ss",
         "ALIGNMENT": "CENTER",
 
