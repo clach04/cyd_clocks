@@ -1,6 +1,8 @@
 # rainbow-test.py
 # Sanity check rotation and colors
 
+import time
+
 import cyd_wrap
 from cyd_wrap import color565, WIDTH, HEIGHT
 
@@ -40,6 +42,22 @@ def display_function():
 cyd = cyd_wrap.CYD()  # takes defaults, assumes CYD2 with 2 usb ports
 try:
     display_function()
+
+    duration = 500  # How long to play each note. (in milliseconds)
+    pause = 2.0  # How long to pause in between each tone. (in seconds)
+
+    # Play tone 1
+    print("Playing Tone 1")
+
+    cyd.play_tone(220, duration)  # A4 Tone
+    time.sleep(pause)
+
+    # Play tone 2
+    print("Playing Tone 2")
+
+    cyd.play_tone(440, duration)  # C5 Tone
+    time.sleep(pause)
+
 finally:
     # Leave screen alone/on for visual inspection - uncomment below to change that
     #cyd.cleanup()
