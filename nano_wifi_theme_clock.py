@@ -87,6 +87,9 @@ def time2str(time_tuple, format_str="{YYYY:04d}-{MM:02d}-{dd:02d} {HH:02d}:{mm:0
 def dumb_format_converter(config_format):
     # partial https://babel.pocoo.org/en/latest/api/dates.html support
     # generate Python string.format() compat
+    if '{' in config_format:
+        # assume in python string.format()
+        return config_format
     result_format = config_format.replace('YYYY', '{YYYY:04d}')
     result_format = result_format.replace('MM', '{MM:02d}')
     result_format = result_format.replace('dd', '{dd:02d}')
