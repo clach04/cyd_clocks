@@ -4,6 +4,9 @@
     "BACKGROUND": "fullscreen",
 
     "FONT_COLOR": "255, 255, 255",
+    "#FONT_SIZE", 35,
+    "#FONT", "arial",
+
 
     "DATE": {
         "FORMAT": "YYYY-MM-dd",
@@ -20,6 +23,10 @@
         "X": 33,
         "Y": 130,
 
+        "#FORMAT": "short",
+        "#FORMAT": "medium",
+        "#FORMAT": "long",
+        "#FORMAT": "full",
         "#FORMAT": "HH:mm",
         "FORMAT": "HH:mm:ss",
         "ALIGNMENT": "CENTER",
