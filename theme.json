@@ -10,6 +10,9 @@
 
     "DATE": {
         "FORMAT": "YYYY-MM-dd",
+        "#ALIGNMENT": "LEFT",
+        "#ALIGNMENT": "CENTER",
+        "#ALIGNMENT": "RIGHT",
         "ALIGNMENT": "RIGHT",
 
         "WIDTH": 260,
