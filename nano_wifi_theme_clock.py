@@ -269,6 +269,7 @@ def display_clock(theme_config):
 
 def rtc_update():
     # NOTE this function will NOT set exact time, at best network fast and only lose time spent on code below
+    print('Attempt to get time from online server %r' % TIME_SERVER_URL)
     try:
         response = requests.get(TIME_SERVER_URL)
         if response.status_code == 200:
@@ -278,6 +279,7 @@ def rtc_update():
             #iso_datetime_str = iso_datetime_str.replace('T', '-').replace(':', '-').replace('.', '-')
             year, month, day, hour, min, sec, microseconds = map(int, parsed['datetime'][:-len("-12:30")].replace('T', '-').replace(':', '-').replace('.', '-').split('-'))
             rtc.datetime((year, month, day, parsed["day_of_week"] - 1, hour, min, sec, microseconds))
+            print('Set RTC')
             return True
         print('response.status_code %r' % response.status_code)
         print('response %r' % response)
