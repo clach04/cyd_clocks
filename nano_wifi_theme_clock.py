@@ -84,12 +84,23 @@ def time2str(time_tuple, format_str="{YYYY:04d}-{MM:02d}-{dd:02d} {HH:02d}:{mm:0
     )
     return format_str.format(**d)
 
+# https://babel.pocoo.org/en/latest/api/dates.html  full, long, medium, or short, or a custom date/time pattern
+format_mappings = {
+    'short': '{HH:02d}:{mm:02d}',  # MISSING am/pm
+    'medium': '{HH:02d}:{mm:02d}:{ss:02d}',  # MISSING am/pm
+    'long': '{HH:02d}:{mm:02d}:{ss:02d}',  # MISSING am/pm and UTC (short timezone name)
+    'full': '{HH:02d}:{mm:02d}:{ss:02d}',  # MISSING am/pm and long timezone name
+}
+
 def dumb_format_converter(config_format):
     # partial https://babel.pocoo.org/en/latest/api/dates.html support
     # generate Python string.format() compat
     if '{' in config_format:
         # assume in python string.format()
         return config_format
+    result_format = format_mappings.get(config_format)
+    if result_format:
+        return result_format
     result_format = config_format.replace('YYYY', '{YYYY:04d}')
     result_format = result_format.replace('MM', '{MM:02d}')
     result_format = result_format.replace('dd', '{dd:02d}')
