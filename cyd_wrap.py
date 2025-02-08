@@ -78,7 +78,7 @@ class CYD():
         self.backlight_pwm.duty(int(backlight_percentage * 10.23))  # 1023 / 100
 
         # Speaker
-        speaker_gain = 1023
+        speaker_gain = 0  # off - max loudness 1023
         self.speaker = machine.Pin(26, machine.Pin.OUT)
         self.speaker_gain = int(min(max(speaker_gain, 0),1023))     # Min 0, Max 1023
         self.speaker_pwm = machine.PWM(self.speaker, freq=440, duty=0)

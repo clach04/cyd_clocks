@@ -116,8 +116,17 @@ ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=height, width=width, usd=default
 #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=False, rotated=True)  # CYD2 with 2x USB ports, this works for portrait viewing, with USB at bottom of screen
 #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, height=320, width=240, usd=True, rotated=True)  # CYD2 with 2x USB ports, this works for portrait viewing, with USB at top of screen
 
+# speaker - init to avoid unexpected frequencies
+# However seems to pick up 2 second system timer and beep when screen refreshes - unclear if its the timer or the screen refresh.
+# Happens even when set to OFF. BUT much louder when ON
+speaker_gain = 0  # off - max loudness 1023
+speaker = machine.Pin(26, machine.Pin.OUT)
+speaker.off()  # PWM preffered instead of on/off
+#speaker_gain = int(min(max(speaker_gain, 0),1023))     # Min 0, Max 1023
+#speaker_pwm = machine.PWM(speaker, freq=440, duty=0)
+
 # on CYD need to turn on backlight to see anything
-backlight_percentage = 50
+backlight_percentage = 100  # with a speaker connected but speaker PWM not init'd, less than 100 can result in high frequency buzz from speaker :-(
 backlight = machine.Pin(21, machine.Pin.OUT)
 backlight_pwm = machine.PWM(backlight)
 #backlight.on()  # PWM preffered instead of on/off
