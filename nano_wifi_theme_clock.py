@@ -147,7 +147,6 @@ def display_clock(theme_config):
     # TODO palette (from background image - "BACKGROUND" ? or new config entries)
     # TODO grayscale true/false option instead of palette
     # TODO refresh rate - "INTERVAL"
-    # TODO hide - "SHOW"
     date_format = dumb_format_converter(theme_config["DATE"].get("FORMAT", "YYYY-MM-dd"))
     time_format = dumb_format_converter(theme_config["TIME"].get("FORMAT", "HH:mm:ss"))
 
