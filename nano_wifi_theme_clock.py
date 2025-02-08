@@ -92,6 +92,7 @@ def display_clock(theme_config):
             else:
                 fn = fn + "_8bit.bin"
         print('Using filename %s' % fn)
+        # TODO load palette for 4-bit?
         # The following line is required if a 4-bit driver is in use
         #ssd.greyscale(True)  # NOTE if omitted, will get some colors - pallete undefined? NOTE2 - MISSING from 8-bit driver
         with open(fn, "rb") as f:
@@ -102,7 +103,8 @@ def display_clock(theme_config):
         refresh(ssd)
 
 
-    # TODO font
+    # TODO default font if missing?
+    # TODO seperate font/size for date and time
     # TODO background color(s) - "BACKGROUND_COLOR"
     # TODO palette (from background image - "BACKGROUND" ? or new config entries)
     # TODO grayscale true/false option instead of palette
