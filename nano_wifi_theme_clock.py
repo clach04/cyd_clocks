@@ -147,9 +147,6 @@ def display_clock(theme_config):
     # TODO palette (from background image - "BACKGROUND" ? or new config entries)
     # TODO grayscale true/false option instead of palette
     # TODO refresh rate - "INTERVAL"
-    date_format = dumb_format_converter(theme_config["DATE"].get("FORMAT", "YYYY-MM-dd"))
-    time_format = dumb_format_converter(theme_config["TIME"].get("FORMAT", "HH:mm:ss"))
-
     font_size = theme_config.get("FONT_SIZE", 35)  # consider using 8x8 font BUT need different font API call...
     font_name = theme_config.get("FONT", "arial")  # consider using 8x8 font BUT need different font API call...
     font_name = font_name + str(font_size)
@@ -170,6 +167,7 @@ def display_clock(theme_config):
     time_show = theme_config["TIME"].get("SHOW", True)
 
     if time_show:
+        time_format = dumb_format_converter(theme_config["TIME"].get("FORMAT", "HH:mm:ss"))
         color_str = theme_config["TIME"].get("FONT_COLOR", default_color_str)
         if default_color_str == color_str:
             time_color = fg_color
@@ -178,6 +176,7 @@ def display_clock(theme_config):
             time_color = create_color(13, r, g, b)  # FIXME hard coded literal, replace with micropython constant
 
     if date_show:
+        date_format = dumb_format_converter(theme_config["DATE"].get("FORMAT", "YYYY-MM-dd"))
         color_str = theme_config["DATE"].get("FONT_COLOR", default_color_str)
         if default_color_str == color_str:
             date_color = fg_color
