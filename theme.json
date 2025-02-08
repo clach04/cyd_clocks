@@ -9,6 +9,8 @@
 
 
     "DATE": {
+        "SHOW": true,
+        "#SHOW": false,
         "FORMAT": "YYYY-MM-dd",
         "#ALIGNMENT": "LEFT",
         "#ALIGNMENT": "CENTER",
@@ -22,6 +24,8 @@
         "FONT_COLOR": "0, 0, 255"
     },
     "TIME": {
+        "SHOW": true,
+        "#SHOW": false,
         "WIDTH": 251,
         "X": 33,
         "Y": 130,

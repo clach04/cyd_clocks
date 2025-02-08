@@ -167,19 +167,24 @@ def display_clock(theme_config):
     # # 12, 13, 14 free for user definition
     fg_color = create_color(12, r, g, b)  # FIXME hard coded literal, replace with micropython constant
 
-    color_str = theme_config["TIME"].get("FONT_COLOR", default_color_str)
-    if default_color_str == color_str:
-        time_color = fg_color
-    else:
-        r, g, b = str2rgb(color_str)
-        time_color = create_color(13, r, g, b)  # FIXME hard coded literal, replace with micropython constant
+    date_show = theme_config["DATE"].get("SHOW", True)
+    time_show = theme_config["TIME"].get("SHOW", True)
 
-    color_str = theme_config["DATE"].get("FONT_COLOR", default_color_str)
-    if default_color_str == color_str:
-        date_color = fg_color
-    else:
-        r, g, b = str2rgb(color_str)
-        date_color = create_color(14, r, g, b)  # FIXME hard coded literal, replace with micropython constant
+    if time_show:
+        color_str = theme_config["TIME"].get("FONT_COLOR", default_color_str)
+        if default_color_str == color_str:
+            time_color = fg_color
+        else:
+            r, g, b = str2rgb(color_str)
+            time_color = create_color(13, r, g, b)  # FIXME hard coded literal, replace with micropython constant
+
+    if date_show:
+        color_str = theme_config["DATE"].get("FONT_COLOR", default_color_str)
+        if default_color_str == color_str:
+            date_color = fg_color
+        else:
+            r, g, b = str2rgb(color_str)
+            date_color = create_color(14, r, g, b)  # FIXME hard coded literal, replace with micropython constant
 
     bg_color = WHITE
 
@@ -191,8 +196,10 @@ def display_clock(theme_config):
     wri.set_clip(True, True, False)
 
     # FIXME  bgcolor=BLACK hard coded
-    label_time = Label(wri, theme_config["TIME"].get("Y", 0), theme_config["TIME"].get("X", 0), text=theme_config["TIME"].get("WIDTH", time_format), fgcolor=time_color, bgcolor=BLACK, align=str2alignment.get(theme_config["TIME"].get("ALIGNMENT", "LEFT"), ALIGN_LEFT))  # FIXME map time_format to text with only zeros
-    date_time  = Label(wri, theme_config["DATE"].get("Y", 0), theme_config["DATE"].get("X", 0), text=theme_config["DATE"].get("WIDTH", date_format), fgcolor=date_color, bgcolor=BLACK, align=str2alignment.get(theme_config["DATE"].get("ALIGNMENT", "LEFT"), ALIGN_LEFT))  # FIXME map date_format to text with only zeros
+    if time_show:
+        label_time = Label(wri, theme_config["TIME"].get("Y", 0), theme_config["TIME"].get("X", 0), text=theme_config["TIME"].get("WIDTH", time_format), fgcolor=time_color, bgcolor=BLACK, align=str2alignment.get(theme_config["TIME"].get("ALIGNMENT", "LEFT"), ALIGN_LEFT))  # FIXME map time_format to text with only zeros
+    if date_show:
+        date_time  = Label(wri, theme_config["DATE"].get("Y", 0), theme_config["DATE"].get("X", 0), text=theme_config["DATE"].get("WIDTH", date_format), fgcolor=date_color, bgcolor=BLACK, align=str2alignment.get(theme_config["DATE"].get("ALIGNMENT", "LEFT"), ALIGN_LEFT))  # FIXME map date_format to text with only zeros
     # FIXME bgcolor, potentially border support too
 
     def paint_time(timer_object):  # TODO should micropython.schedule() be used?
@@ -201,11 +208,13 @@ def display_clock(theme_config):
         global start_time
 
         l = local_time_tuple_function()
-        # TODO don't update date if not changed
-        time_str = time2str(l, time_format)
-        date_str = time2str(l, date_format)
-        label_time.value(time_str)
-        date_time.value(date_str)
+        if date_show:
+            # TODO don't update date if not changed
+            date_str = time2str(l, date_format)
+            date_time.value(date_str)
+        if time_show:
+            time_str = time2str(l, time_format)
+            label_time.value(time_str)
 
         """
         # About 4-5 FPS with date and time in arial35
