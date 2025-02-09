@@ -6,6 +6,8 @@ https://github.com/micropython/micropython code written for use with ESP32-2432S
 
 NOTE some scripts expect/need/rely on https://github.com/clach04/MicroWiFiManager/tree/mine
 
+## Device Information
+
 Hardware notes, printed ids:
 
 ESP32-2432S028
@@ -15,6 +17,11 @@ on ESP32:
   * FCC ID: 2AC7Z-ESP-WROOM32
 
 LCD has printed TPM408-2.8
+
+  * https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/discussions/173
+  * https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/
+
+## MicroPython
 
 Relies on Micropython with library/libraries:
 
