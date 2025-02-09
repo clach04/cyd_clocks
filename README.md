@@ -98,6 +98,8 @@ Also see https://wallpaperscraft.com/download/screen_tv_test_card_129823/240x320
 
 ## Also see
 
-  * https://github.com/rzeldent/platformio-espressif32-sunton
+  * PlatformIO defs
+      * https://github.com/rzeldent/esp32-smartdisplay PlatformIO library LVGL Drivers for Sunton Smart display boards (CYD Cheap Yellow Display). This library supports these boards without any effort. ESP32-2432S024N/R/C, ESP32-2432S028R/C, ESP32-3248S035R/C, ESP32_8048S070N/C
+      * https://github.com/rzeldent/platformio-espressif32-sunton
   * https://www.reddit.com/r/esp32/comments/1dy5k11/working_cyd_jc2432w328_display_240x320_28_usbc/
   * https://github.com/jtobinart/MicroPython_CYD_ESP32-2432S028R
