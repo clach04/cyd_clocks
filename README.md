@@ -96,3 +96,6 @@ See [images](./images).
 
 Also see https://wallpaperscraft.com/download/screen_tv_test_card_129823/240x320
 
+## Also see
+
+  * https://github.com/jtobinart/MicroPython_CYD_ESP32-2432S028R
