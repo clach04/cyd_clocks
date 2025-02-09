@@ -116,3 +116,4 @@ esp registry https://components.espressif.com/
   * https://github.com/de-dh/ESP32-Cheap-Yellow-Display-Micropython-LVGL
   * https://github.com/usini/micropython_lvgl_cyd
   * radio streamer to speaker https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/Examples/Basics/7-HelloRadio/7-HelloRadio.ino
+  * Alt drivers (C) https://github.com/lovyan03/LovyanGFX
