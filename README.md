@@ -105,4 +105,4 @@ Also see https://wallpaperscraft.com/download/screen_tv_test_card_129823/240x320
   * https://github.com/jtobinart/MicroPython_CYD_ESP32-2432S028R
   * https://github.com/de-dh/ESP32-Cheap-Yellow-Display-Micropython-LVGL
   * https://github.com/usini/micropython_lvgl_cyd
-
+  * radio streamer to speaker https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/Examples/Basics/7-HelloRadio/7-HelloRadio.ino
