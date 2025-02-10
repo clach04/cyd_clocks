@@ -52,7 +52,7 @@ prst = Pin(PIN_rst, Pin.OUT, value=1)
 gc.collect()  # Precaution before instantiating framebuf
 
 #spi = SPI(1, 40_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi), miso=Pin(12))
-#spi = SPI(1, 40_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))  # default miso. 40Mhz out of spec but seems to work fine
+#spi = SPI(1, 40_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))  # default miso. 40Mhz out of spec but seems to work fine.. built much louder beep-interference unwanted noise than with 10Mhz
 spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))  # default miso
 
 
