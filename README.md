@@ -6,6 +6,11 @@ https://github.com/micropython/micropython code written for use with ESP32-2432S
 
 NOTE some scripts expect/need/rely on https://github.com/clach04/MicroWiFiManager/tree/mine
 
+Firmware recommendation:
+
+  * https://micropython.org/download/ESP32_GENERIC/
+      * Specifically https://micropython.org/resources/firmware/ESP32_GENERIC-20241129-v1.24.1.bin
+
 ## Device Information
 
 Hardware notes, printed ids:
@@ -60,7 +65,7 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
       * nano_bitmap_fullscreen.py - load and display bitmap image "fullscreen.bin", also see bitmap_fullscreen.py
       * nano_wifi_clock_timer.py - incomplete WIP nano version of wifi_clock_timer.py
       * nano_wifi_theme_clock.py - incomplete WIP - theme support https://github.com/clach04/cyd_clocks/issues/39
-      * image_converter.py - PIL/Pillow image converter for nano-GUI, only supports 4-bit and expects pallete to be setup already
+      * image_converter.py - PIL/Pillow image converter for nano-GUI, only supports 4-bit and expects pallete to be setup already (alternative to img_cvt.py)
 
 ili9341 driver
 
