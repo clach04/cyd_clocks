@@ -18,6 +18,8 @@ refresh(ssd, True)  # Initialise and clear display.
     \ _
      |_| Blue Square (outline/filled)
   (x, y)
+
+For CYD - assumes USB port(s) on right hand-side
 """
 filled = False  # useful to ensuring have perfect pixel end of screen
 filled = True
