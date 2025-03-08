@@ -54,6 +54,7 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
 
   * hw_info.py - Dump device information out to the serial port
   * wifi_setup.py - Connect to wifi quickly, suitable for then issuing `mip` to install packages
+      * to be used with https://github.com/clach04/MicroWiFiManager/tree/mine
 
 Nano GUI
 
