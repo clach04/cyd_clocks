@@ -69,8 +69,6 @@ def get_config(fn='clock.json'):  # TODO consider using https://github.com/Uthay
     # TODO NTP Server list
     return c
 
-TIME_SERVER_URL = 'http://worldtimeapi.org/api/ip'
-
 cyd = cyd_wrap.CYD()  # takes defaults, assumes CYD2 with 2 usb ports
 display = cyd.display
 
