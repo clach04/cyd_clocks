@@ -6,6 +6,13 @@ https://github.com/micropython/micropython code written for use with ESP32-2432S
 
 NOTE some scripts expect/need/rely on https://github.com/clach04/MicroWiFiManager/tree/mine
 
+Firmware recommendation:
+
+  * https://micropython.org/download/ESP32_GENERIC/
+      * Specifically https://micropython.org/resources/firmware/ESP32_GENERIC-20241129-v1.24.1.bin
+
+## Device Information
+
 Hardware notes, printed ids:
 
 ESP32-2432S028
@@ -15,6 +22,11 @@ on ESP32:
   * FCC ID: 2AC7Z-ESP-WROOM32
 
 LCD has printed TPM408-2.8
+
+  * https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/discussions/173
+  * https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/
+
+## MicroPython
 
 Relies on Micropython with library/libraries:
 
@@ -53,7 +65,7 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
       * nano_bitmap_fullscreen.py - load and display bitmap image "fullscreen.bin", also see bitmap_fullscreen.py
       * nano_wifi_clock_timer.py - incomplete WIP nano version of wifi_clock_timer.py
       * nano_wifi_theme_clock.py - incomplete WIP - theme support https://github.com/clach04/cyd_clocks/issues/39
-      * image_converter.py - PIL/Pillow image converter for nano-GUI, only supports 4-bit and expects pallete to be setup already
+      * image_converter.py - PIL/Pillow image converter for nano-GUI, only supports 4-bit and expects pallete to be setup already (alternative to img_cvt.py)
 
 ili9341 driver
 
@@ -96,3 +108,17 @@ See [images](./images).
 
 Also see https://wallpaperscraft.com/download/screen_tv_test_card_129823/240x320
 
+## Also see
+
+esp registry https://components.espressif.com/
+
+  * https://github.com/lvgl-micropython/lvgl_micropython/discussions/281 lvgl build with micropython
+  * PlatformIO defs
+      * https://github.com/rzeldent/esp32-smartdisplay PlatformIO library LVGL Drivers for Sunton Smart display boards (CYD Cheap Yellow Display). This library supports these boards without any effort. ESP32-2432S024N/R/C, ESP32-2432S028R/C, ESP32-3248S035R/C, ESP32_8048S070N/C
+      * https://github.com/rzeldent/platformio-espressif32-sunton
+  * https://www.reddit.com/r/esp32/comments/1dy5k11/working_cyd_jc2432w328_display_240x320_28_usbc/
+  * https://github.com/jtobinart/MicroPython_CYD_ESP32-2432S028R
+  * https://github.com/de-dh/ESP32-Cheap-Yellow-Display-Micropython-LVGL
+  * https://github.com/usini/micropython_lvgl_cyd
+  * radio streamer to speaker https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/Examples/Basics/7-HelloRadio/7-HelloRadio.ino
+  * Alt drivers (C) https://github.com/lovyan03/LovyanGFX

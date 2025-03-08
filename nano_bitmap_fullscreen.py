@@ -28,17 +28,18 @@ For files already in the correct dimensions, no dithering gives better results.
 from color_setup import ssd  # Create a display instance. NOTE edit to select 4-bit or 8-bit driver (there is no 16-bit driver)
 from gui.core.nanogui import refresh
 
+fn = "fullscreen"
 
 refresh(ssd)  # Initialise display.
 if hasattr(ssd, 'lut'):
     # for CYD - this is 4-bit, could be grayscale (14 colors) or color with a 16 color palette - self.mode == framebuf.GS4_HMSB
-    fn = "fullscreen_4bit.bin"  # Image created by `img_cvt.py`
+    fn = fn + "_4bit.bin"  # Image created by `img_cvt.py`
     # Either:
     # set palette manually or:
     #ssd.greyscale(True)
 else:
     # for CYD - this is 8-bit - ssd.mode == framebuf.GS8
-    fn = "fullscreen_8bit.bin"  # Image created by `img_cvt.py`
+    fn = fn + "_8bit.bin"  # Image created by `img_cvt.py`
 
 print('Using filename %s' % fn)
 # The following line is required if a 4-bit driver is in use

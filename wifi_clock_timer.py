@@ -35,6 +35,7 @@ TODO look at async / uasyncio
 
 import machine
 import network
+import ntptime
 import requests
 import time
 
@@ -43,16 +44,37 @@ from ili9341 import Display, color565  # from https://github.com/rdagger/micropy
 
 from microwifimanager.manager import WifiManager
 
+try:
+    import posix_tz  # https://github.com/clach04/py-posix_tz
+except ImportError:
+    posix_tz = None
+
 import cyd_wrap
 from cyd_wrap import color565, WIDTH, HEIGHT
 
 from umb43x61numbers import UMB  # load font. hopefully faster/cheaper than XglcdFont() load
 
 
+def get_config(fn='clock.json'):  # TODO consider using https://github.com/Uthayamurthy/ConfigManager-Micropython (note it uses regexes...)
+    # NOTE less memory if just try and open file and deal with errors
+    try:
+        with open(fn) as f:
+            c = json.load(f)
+    except:
+        # yeah, bare except, gulp :-(
+        c = {}
+    # dumb update/merge for defaults
+    c['TZ'] = c.get('TZ', 'PST8PDT,M3.2.0/2:00:00,M11.1.0/2:00:00')
+    c['time_url'] = c.get('time_url', 'http://worldtimeapi.org/api/ip')
+    # TODO NTP Server list
+    return c
+
 TIME_SERVER_URL = 'http://worldtimeapi.org/api/ip'
 
 cyd = cyd_wrap.CYD()  # takes defaults, assumes CYD2 with 2 usb ports
 display = cyd.display
+
+config = get_config()
 
 rtc = machine.RTC()
 # NOTE expects local time set (via Thonny) for now
@@ -131,11 +153,19 @@ def display_clock():
         machine.idle()
         # Can not use machine.lightsleep(), timer never wakes up (unless specify a sleep period). TODO RTC alarm...
 
-def rtc_update():
+def rtc_update(config):
+    if config['TZ']:
+        print('Attempt NTP sync')
+        ntptime.settime()  # TODO config for which server(s) to use for ntp time lookup.
+        return True  # TODO check return result from above, for now assume alwasy successful... FIXME!
+
+    print('Attempt http (REST) time sync')
+    time_url = config['time_url']
+
     # NOTE this function will NOT set exact time, at best network fast and only lose time spent on code below
-    print('Attempt to get time from online server %r' % TIME_SERVER_URL)
+    print('Attempt to get time from online server %r' % time_url)
     try:
-        response = requests.get(TIME_SERVER_URL)
+        response = requests.get(time_url)
         if response.status_code == 200:
             parsed = response.json()
             #iso_datetime_str = parsed['datetime']  # "2024-12-13T14:15:16.000000-12:30"
@@ -169,11 +199,22 @@ try:
     print("hostname: %r" % (network.hostname(),))
 
     display.draw_text8x8(0, 24, 'Connected %s Sync RTC' % wlan.config('ssid'), COLOR_WHITE, COLOR_BLACK)
-    if rtc_update():
+
+    print('pause for wifi to really be up')
+    time.sleep(1)  # 1 second
+
+    if rtc_update(config):
         display.clear()
     else:
         display.clear()
         display.draw_text8x8(0, 10, 'Failed to get and sync time', COLOR_BLACK, COLOR_WHITE)
+
+    if posix_tz:
+        posix_tz.set_tz(config['TZ'])
+        print('time: %r' % (local_time_tuple_function(),))
+        local_time_tuple_function = posix_tz.localtime
+        print('TZ adjusted time: %r' % (posix_tz.localtime(),))
+
     # now use wlan.ABC to check status, etc.
 
     display_clock()
