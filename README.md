@@ -53,6 +53,7 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
 ## MicroPython Demos
 
   * hw_info.py - Dump device information out to the serial port
+  * wifi_setup.py - Connect to wifi quickly, suitable for then issuing `mip` to install packages
 
 Nano GUI
 
