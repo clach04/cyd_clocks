@@ -35,6 +35,7 @@ import gc
 # CYD1 does have enough memory on main.py for 8-bit color
 from drivers.ili93xx.ili9341 import ILI9341 as SSD  # 4-bit buffer, also supports grayscale/greyscale
 #from drivers.ili93xx.ili9341_8bit import ILI9341 as SSD  # 8-bit buffer (needs more 2x memory of 4-bit driver) - does not support grayscale/greyscale, for non-color use matching r, g, b values.
+# https://github.com/peterhinch/micropython-nano-gui/blob/master/DRIVERS.md#32-drivers-for-ili9341
 
 PIN_sck = 14
 PIN_mosi = 13
@@ -61,25 +62,41 @@ spi = SPI(1, 10_000_000, sck=Pin(PIN_sck), mosi=Pin(PIN_mosi))  # default miso
 
 number_of_usb_ports = 1
 number_of_usb_ports = 2
+hw458 = False
+hw458 = True
 if number_of_usb_ports == 1:
     # CYD / CYD1
-    # landscape - (0, 0) is top left hand corner
+    # landscape - (0, 0) is top left hand corner, USB port(s) on right hand-side - see nano_rgb_test.py
     #ssd = SSD(spi, dc=pdc, cs=pcs, rst=prst, usd=True)  # CYD1 working landscape mode
     default_mod = None
     default_bgr = False
     default_usd = True
 else:  # if number_of_usb_ports == 2:
     # CYD2
-    # landscape
+    # landscape - (0, 0) is top left hand corner, USB port(s) on right hand-side - see nano_rgb_test.py
     # NOTE on (first) init, CYD2 screen will contain static (unlike CYD1)
-    #default_mod = 1  # 1, 3, 5, and 7 is GARBAGE
-    #default_mod = 0  # 0  appears to be landscape mirror flipped vertically - (0, 0) is top right hand corner
-    #default_mod = 2  # 2 is landscape, flipped/mirrored somehow (TBD) - (0, 0) is bottom right hand corner
-    #default_mod = 4  # 4 is landscape, correct! - (0, 0) is top left hand corner
-    #default_mod = 6  # 4 is landscape, flipped/mirrored somehow (TBD) - (0, 0) is bottom left hand corner
-    default_mod = 4  # 4 is landscape, correct! - (0, 0) is top left hand corner
-    default_bgr = True
-    default_usd = False
+
+    if not hw458:
+        # this is the first version of 2-port CYD I've seen
+        #default_mod = 1  # 1, 3, 5, and 7 is GARBAGE
+        #default_mod = 0  # 0  appears to be landscape mirror flipped vertically - (0, 0) is top right hand corner
+        #default_mod = 2  # 2 is landscape, flipped/mirrored somehow (TBD) - (0, 0) is bottom right hand corner
+        #default_mod = 4  # 4 is landscape, correct! - (0, 0) is top left hand corner
+        #default_mod = 6  # 4 is landscape, flipped/mirrored somehow (TBD) - (0, 0) is bottom left hand corner
+        default_mod = 4  # 4 is landscape, correct! - (0, 0) is top left hand corner
+        default_bgr = True
+        default_usd = False
+    else:
+        # Seen 2025-03, 2-ports but behaves more like CYD1
+        #default_mod = None  # 0, 2, 6, and 6 is GARBAGE
+        #default_mod = 7  # with my CYD2 that behaves like CYD2 - works but rotated 180
+        #default_mod = 5  # with my CYD2 that behaves like CYD2 - like 0 but mirrored-horizontally, top right is red square in rgb test
+        #default_mod = 3  # with my CYD2 that behaves like CYD2 - like 0 but mirrored-vertically, bottom left is red square in rgb test
+        default_mod = 1  # with my CYD2 that behaves like CYD2 - Perfect!
+
+        default_bgr = False  # TODO check color quality
+        default_usd = True  # TODO check - this works in both directions - unclear on performance impact
+
 height, width = 240, 320
 
 
