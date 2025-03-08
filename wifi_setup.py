@@ -12,7 +12,7 @@
 
 import network
 
-from microwifimanager.manager import WifiManager
+from microwifimanager.manager import WifiManager  # expects https://github.com/clach04/MicroWiFiManager/tree/mine
 
 
 ssid = 'cyd'
