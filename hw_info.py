@@ -14,6 +14,7 @@ try:
 except ImportError:
     esp = None
 import machine
+import micropython
 import network
 
 
@@ -26,6 +27,8 @@ def printable_mac(in_bytes, seperator=':'):
 print('gc.mem_free %r - pre-collect' % (gc.mem_free(),))
 gc.collect()
 print('gc.mem_free %r - post-collect' % (gc.mem_free(),))
+print('micropython.mem_info()')
+micropython.mem_info()  # just dumps to serial out :-(
 print('os.uname %r' % (os.uname(),))
 print('platform.platform %r' % (platform.platform(),))
 print('sys.implementation %r' % (sys.implementation,))
