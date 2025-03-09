@@ -22,10 +22,10 @@ refresh(ssd, True)  # Initialise and clear display.
 
 For CYD - assumes USB port(s) on right hand-side
 """
-fg = WHITE  # For now assume White  # TODO figure out what color to use for background (which defaults wiht refresh() and foreground
+fg = WHITE  # For now assume White  # TODO figure out what color to use for background and foreground
 bg = BLACK  # default for now
 
-ssd.fill(0)  # TODO review this, should this be BLACK?
+ssd.fill(bg)
 ssd.line(0, 0, ssd.width - 1, ssd.height - 1, fg)  # fg diagonal corner-to-corner  # TODO should this go corner to corner of screen or from inner-corner of squares?
 ssd.rect(0, 0, 15, 15, fg, True)  # fg square filled at top left
 ssd.rect(ssd.width -15, ssd.height -15, 15, 15, fg, False)  # fg square outline at bottom right
