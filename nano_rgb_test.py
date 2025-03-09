@@ -22,7 +22,7 @@ refresh(ssd, True)  # Initialise and clear display.
 
 For CYD - assumes USB port(s) on right hand-side
 """
-filled = False  # useful to ensuring have perfect pixel end of screen
+filled = False  # useful to ensuring have pixel-perfect start/end of screen
 filled = True
 
 ssd.fill(0)

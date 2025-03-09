@@ -62,6 +62,7 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
   * [color_setup.py](https://github.com/clach04/cyd_clocks/blob/main/color_setup.py) - setup/config for using CYD1 and CYD2 with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui - see https://github.com/peterhinch/micropython-nano-gui/blob/master/setup_examples/ili9341_esp32_2432S028r.py
       * use with demos like gui.demos.aclock_large - https://github.com/peterhinch/micropython-nano-gui/blob/master/gui/demos/aclock_large.py
       * nano_rgb_test.py - color and screen size/direction/orientation test/demo
+      * nano_mono_test.py - 2 color screen size/direction/orientation test/demo
       * nano_rainbow_test.py - simple full screen rainbow color demo, also see rainbow_test.py
       * nano_helloworld.py - text/font demo - uses framebuffer and nano labels
       * nano_bitmap_fullscreen.py - load and display bitmap image "fullscreen.bin", also see bitmap_fullscreen.py
