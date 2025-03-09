@@ -1,4 +1,5 @@
-# from https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#23-verifying-hardware-configuration
+# color and screen size/direction/orientation test/demo
+# Based on code from https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#23-verifying-hardware-configuration
 
 from color_setup import ssd  # Create a display instance
 from gui.core.colors import RED, BLUE, GREEN
