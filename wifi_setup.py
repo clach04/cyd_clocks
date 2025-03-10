@@ -4,6 +4,7 @@
     import mip
     mip.install("github:peterhinch/micropython-nano-gui")  # this will pull down demos :-(
     #mip.install("github:peterhinch/micropython-nano-gui/drivers/ili93xx")
+    #mip.install("github:peterhinch/micropython-nano-gui/drivers/epaper")
     # below do not work, which limit the usefulness of driver only install
     #mip.install("github:peterhinch/micropython-nano-gui/gui/core")
     #mip.install("github:peterhinch/micropython-nano-gui/gui/core/colors")
