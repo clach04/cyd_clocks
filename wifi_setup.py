@@ -2,6 +2,7 @@
 """Usefull for quick mip install
 
     import mip
+    mip.install("github:peterhinch/micropython-async/v3/as_drivers/sched")
     mip.install("github:peterhinch/micropython-nano-gui")  # this will pull down demos :-(
     #mip.install("github:peterhinch/micropython-nano-gui/drivers/ili93xx")
     #mip.install("github:peterhinch/micropython-nano-gui/drivers/epaper")
