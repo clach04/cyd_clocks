@@ -74,6 +74,8 @@ ili9341 driver
 
 Needs https://github.com/rdagger/micropython-ili9341
 
+TODO create equivilent of nano_rgb_test.py
+
   * [cyd_wrap.py](https://github.com/clach04/cyd_clocks/blob/main/cyd_wrap.py) - simple wrapper NOTE look for EDIT_ME and modify for your device
       * [rainbow_test.py](https://github.com/clach04/cyd_clocks/blob/main/rainbow_test.py) - simple full screen rainbow color demo, also see nano_rainbow_test.py
       * [rainbow_test_speaker.py](https://github.com/clach04/cyd_clocks/blob/main/rainbow_test_speaker.py) - duplicated rainbow_test.py with simple tone playing
