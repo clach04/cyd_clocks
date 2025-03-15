@@ -89,3 +89,25 @@ if check_i2c_bus:
     i2c = machine.SoftI2C(machine.Pin(SDA_pin_number), machine.Pin(SCL_pin_number), freq=400000)  # NOTE I think this is reversed... NOTE micropython_version v1.19.1 needs Pins (not numbers), v1.24.1 does NOT
     for device_id in i2c.scan():
         print('found %02x (%d)' % (device_id, device_id))
+
+# Figure out how much memory really available
+alloc_memory = 128 * 1024  # 128Kb
+alloc_memory = 64 * 1024  # 64Kb
+alloc_memory = 32 * 1024  # 32Kb
+alloc_memory = 1 * 1024
+allocated = []
+allocated_count = 0
+if alloc_memory:
+    while alloc_memory:
+        try:
+            temp_buf = bytearray(alloc_memory)
+            allocated.append(temp_buf)
+            allocated_count += len(temp_buf)
+        except MemoryError:
+            alloc_memory = 0
+    print('allocated_count = %d (%fKb %fMb )' % (allocated_count, allocated_count / 1024, allocated_count / 1024 / 1024))
+    print('gc.mem_free %r - pre-collect' % (gc.mem_free(),))
+    gc.collect()
+    print('gc.mem_free %r - post-collect' % (gc.mem_free(),))
+    print('micropython.mem_info()')
+    micropython.mem_info()  # just dumps to serial out :-(
