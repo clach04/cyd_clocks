@@ -111,7 +111,10 @@ License either Public Domain or Creative Commons
 
 See [images](./images).
 
-Also see https://wallpaperscraft.com/download/screen_tv_test_card_129823/240x320
+Also see: 
+
+  * https://github.com/clach04/HDTVTestPattern
+  * https://wallpaperscraft.com/download/screen_tv_test_card_129823/240x320
 
 ## Also see
 
