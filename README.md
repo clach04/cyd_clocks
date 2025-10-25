@@ -9,7 +9,8 @@ NOTE some scripts expect/need/rely on https://github.com/clach04/MicroWiFiManage
 Firmware recommendation:
 
   * https://micropython.org/download/ESP32_GENERIC/
-      * Specifically https://micropython.org/resources/firmware/ESP32_GENERIC-20241129-v1.24.1.bin
+      * Specifically (from 2024-11-29) https://micropython.org/resources/firmware/ESP32_GENERIC-20241129-v1.24.1.bin
+      * NOTE as of 2025-09-11 v1.26.1 is available
 
 ## Device Information
 
