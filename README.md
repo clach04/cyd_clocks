@@ -37,7 +37,7 @@ Relies on Micropython with library/libraries:
   * https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/
 
 The code in this repo was originally written to support MicroPython 1.19.1,
-but may (soon) require MicroPython 1.24.1+.
+but may (soon) require MicroPython 1.24.1+ (Nano GUI expects `asyncio`, rather than the older `uasyncio` namespace).
 
 NOTE on my device color reproduction is improved with changes in ILI9341 init,
 either pass in `gamma=False` or modify driver with changes from https://github.com/de-dh/ESP32-Cheap-Yellow-Display-Micropython-LVGL/tree/main/demo_no_lvgl:
@@ -52,7 +52,15 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
 
 ## MicroPython Demos
 
+Recommend using Thonny or mpremote
+
   * hw_info.py - Dump device information out to the serial port
+
+        mpremote connect com5 mount .
+        import hw_info
+        # Then issue CTRL-] (to exit) or CTRL-D (to restart)
+
+
   * wifi_setup.py - Connect to wifi quickly, suitable for then issuing `mip` to install packages
       * to be used with https://github.com/clach04/MicroWiFiManager/tree/mine
 
@@ -64,6 +72,11 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
       * nano_rgb_test.py - color and screen size/direction/orientation test/demo
       * nano_mono_test.py - 2 color screen size/direction/orientation test/demo
       * nano_rainbow_test.py - simple full screen rainbow color demo, also see rainbow_test.py
+
+            # In a micropython-nano-gui checkout (also with some of these demos)
+            mpremote connect com5 mount .
+            import nano_rainbow_test
+
       * nano_helloworld.py - text/font demo - uses framebuffer and nano labels
       * nano_bitmap_fullscreen.py - load and display bitmap image "fullscreen.bin", also see bitmap_fullscreen.py
       * nano_wifi_clock_timer.py - incomplete WIP nano version of wifi_clock_timer.py
@@ -78,6 +91,11 @@ TODO create equivilent of nano_rgb_test.py
 
   * [cyd_wrap.py](https://github.com/clach04/cyd_clocks/blob/main/cyd_wrap.py) - simple wrapper NOTE look for EDIT_ME and modify for your device
       * [rainbow_test.py](https://github.com/clach04/cyd_clocks/blob/main/rainbow_test.py) - simple full screen rainbow color demo, also see nano_rainbow_test.py
+
+            mpremote connect com5 mount .
+            import rainbow_test
+            import nano_rainbow_test
+
       * [rainbow_test_speaker.py](https://github.com/clach04/cyd_clocks/blob/main/rainbow_test_speaker.py) - duplicated rainbow_test.py with simple tone playing
       * bitmap_fullscreen.py - load and display bitmap image "fullscreen_320x240_rgb565.raw", can be created from sample in `images` directory, also see nano_bitmap_fullscreen.py
       * font_clock_timer_paint.py - simple font based clock
@@ -111,7 +129,7 @@ License either Public Domain or Creative Commons
 
 See [images](./images).
 
-Also see: 
+Also see:
 
   * https://github.com/clach04/HDTVTestPattern
   * https://wallpaperscraft.com/download/screen_tv_test_card_129823/240x320
