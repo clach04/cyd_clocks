@@ -22,7 +22,7 @@ def display_function():
 
     offset = 0
     for color in color_list:
-        #FrameBuffer.rect(x, y, w, h, c[, f])¶
+        #FrameBuffer.rect(x, y, w, h, c[, f])
         ssd.rect(offset, 0, bar_width, bar_height, color, True)  # Red square at top left
         offset += bar_width
     refresh(ssd)
