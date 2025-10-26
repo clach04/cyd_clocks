@@ -95,7 +95,8 @@ else:  # if number_of_usb_ports == 2:
         #default_mod = 6  # 4 is landscape, flipped/mirrored somehow (TBD) - (0, 0) is bottom left hand corner
         default_mod = 4  # 4 is landscape, correct! - (0, 0) is top left hand corner
         default_bgr = True
-        default_usd = False
+        #default_usd = False
+        default_usd = True  # Yellow looks slightly better, orange doesn't look great
 
 height, width = 240, 320
 
