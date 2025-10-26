@@ -68,7 +68,7 @@ Recommend using Thonny or mpremote
 Nano GUI
 
 See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-quick-start for how to gets started (use mpremote and try a demo)
-  * [color_setup.py](https://github.com/clach04/cyd_clocks/blob/main/color_setup.py) - setup/config for using CYD1 and CYD2 with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui - see https://github.com/peterhinch/micropython-nano-gui/blob/master/setup_examples/ili9341_esp32_2432S028r.py
+  * [color_setup.py](https://github.com/clach04/cyd_clocks/blob/main/color_setup.py) - TODO requires EDIT setup/config for using CYD1 and CYD2 with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui - see https://github.com/peterhinch/micropython-nano-gui/blob/master/setup_examples/ili9341_esp32_2432S028r.py
       * use with demos like gui.demos.aclock_large - https://github.com/peterhinch/micropython-nano-gui/blob/master/gui/demos/aclock_large.py
       * nano_rgb_test.py - color and screen size/direction/orientation test/demo
       * nano_mono_test.py - 2 color screen size/direction/orientation test/demo
@@ -76,6 +76,7 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
 
             # In a micropython-nano-gui checkout (also with some of these demos)
             mpremote connect com5 mount .
+            # import sys ; sys.path[2] = 'lib'  # https://github.com/micropython/micropython/issues/9734
             import nano_rainbow_test
 
       * nano_helloworld.py - text/font demo - uses framebuffer and nano labels
@@ -95,7 +96,7 @@ TODO create equivilent of nano_rgb_test.py
 
             mpremote connect com5 mount .
             import rainbow_test
-            import nano_rainbow_test
+            # NOTE good chance this will fail due to out of memory; MemoryError: memory allocation failed, allocating ABC bytes
 
       * [rainbow_test_speaker.py](https://github.com/clach04/cyd_clocks/blob/main/rainbow_test_speaker.py) - duplicated rainbow_test.py with simple tone playing
       * bitmap_fullscreen.py - load and display bitmap image "fullscreen_320x240_rgb565.raw", can be created from sample in `images` directory, also see nano_bitmap_fullscreen.py
