@@ -44,6 +44,7 @@ except ImportError:
 def get_config(fn='clock.json'):  # TODO consider using https://github.com/Uthayamurthy/ConfigManager-Micropython (note it uses regexes...)
     # NOTE less memory if just try and open file and deal with errors
     try:
+        print('DEBUG open conf file %s' % (fn,))
         with open(fn) as f:
             c = json.load(f)
     except:
@@ -140,6 +141,7 @@ def display_clock(theme_config):
     fn = theme_config.get("BACKGROUND")  # background image filename in "raw" format, the driver dictates the format (which is typically loaded first)
     if fn:
         # take filename if missing and append "_4bit.bin" / "_8bit.bin" depending on drivver (or ssd.mode?) - alternative loading display after theme loading
+        # TODO document this for config settings, and theme authors/editors/creators
         if not file_or_dir_exists(fn):
             if hasattr(ssd, 'lut'):
                 fn = fn + "_4bit.bin"
@@ -148,7 +150,7 @@ def display_clock(theme_config):
                 #ssd.greyscale(True)
             else:
                 fn = fn + "_8bit.bin"
-        print('Using filename %s' % fn)
+        print('Using BACKGROUND filename %s' % fn)
         # TODO load palette for 4-bit?
         # The following line is required if a 4-bit driver is in use
         #ssd.greyscale(True)  # NOTE if omitted, will get some colors - pallete undefined? NOTE2 - MISSING from 8-bit driver
@@ -391,7 +393,7 @@ try:
     if not file_or_dir_exists(theme_filename):
         theme = {}
     else:
-        print('DEBUG open file')
+        print('DEBUG open theme file %s' % (theme_filename,))
         f = open(theme_filename)
         print('DEBUG load file')
         theme = json.load(f)  # NOTE this is not quick
