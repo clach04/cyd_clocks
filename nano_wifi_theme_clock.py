@@ -394,7 +394,7 @@ try:
         theme = {}
     else:
         print('DEBUG open theme file %s' % (theme_filename,))
-        f = open(theme_filename)
+        f = open(theme_filename)  # FIXME / TODO handle missing file - no on-screen information about failure :-(
         print('DEBUG load file')
         theme = json.load(f)  # NOTE this is not quick
         print('DEBUG close file')
