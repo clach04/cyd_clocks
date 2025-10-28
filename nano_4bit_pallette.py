@@ -21,6 +21,26 @@ nano_gui_palette = [
     200, 200, 200,  # 14 darkest-Grey  # NOTE not a reserved nano-color
     255, 255, 255,  # WHITE
 ]
+
+nano_gui_palette_tuples = [
+    (0, 0, 0,      ),  # BLACK
+    (0, 255, 0,    ),  # GREEN
+    (255, 0, 0,    ),  # RED
+    (140, 0, 0,    ),  # LIGHTRED  (actually dark-red)
+    (0, 0, 255,    ),  # BLUE
+    (255, 255, 0,  ),  # YELLOW
+    (100, 100, 100,),  # GREY
+    (255, 0, 255,  ),  # MAGENTA
+    (0, 255, 255,  ),  # CYAN
+    (0, 100, 0,    ),  # LIGHTGREEN
+    (0, 80, 0,     ),  # DARKGREEN
+    (0, 0, 90,     ),  # DARKBLUE
+    (75, 75, 75,   ),  # 12 light-Grey  # NOTE not a reserved nano-color
+    (150, 150, 150,),  # 13 darker-Grey  # NOTE not a reserved nano-color
+    (200, 200, 200,),  # 14 darkest-Grey  # NOTE not a reserved nano-color
+    (255, 255, 255,),  # WHITE
+]
+
 NANO_COLOR_BLACK = 0
 NANO_COLOR_GREEN = 1
 NANO_COLOR_RED = 2
@@ -38,10 +58,21 @@ NANO_COLOR_DARKERGREY = 13  # NOTE not a reserved nano-color
 NANO_COLOR_DARKESTGREY = 14  # NOTE not a reserved nano-color
 NANO_COLOR_WHITE = 15
 
-# ...
-
-mode = 'P'  # palette
-screen_res = (320, 240)
-image = Image.new(mode, screen_res, background_color)
-image.putpalette(nano_gui_palette)  # setup palette/index
-draw = ImageDraw.Draw(image)
+nano_gui_palette_index = [
+    NANO_COLOR_BLACK,
+    NANO_COLOR_GREEN,
+    NANO_COLOR_RED,
+    NANO_COLOR_LIGHTRED,
+    NANO_COLOR_BLUE,
+    NANO_COLOR_YELLOW,
+    NANO_COLOR_GREY,
+    NANO_COLOR_MAGENTA,
+    NANO_COLOR_CYAN,
+    NANO_COLOR_LIGHTGREEN,
+    NANO_COLOR_DARKGREEN,
+    NANO_COLOR_DARKBLUE,
+    NANO_COLOR_LIGHTGREY,  # NOTE not a reserved nano-color
+    NANO_COLOR_DARKERGREY,  # NOTE not a reserved nano-color
+    NANO_COLOR_DARKESTGREY,  # NOTE not a reserved nano-color
+    NANO_COLOR_WHITE
+]

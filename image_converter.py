@@ -11,6 +11,8 @@ import sys
 
 from PIL import Image
 
+import nano_4bit_pallette
+
 is_py3 = sys.version_info >= (3,)
 
 def mygetpalette(pal_type, orig_image_palette):
@@ -67,6 +69,7 @@ for entry in indexed_palette:
     print(entry)
 print('TODO review palette for accuracy')
 # For now, just assume this is correct
+assert indexed_palette == nano_4bit_pallette.nano_gui_palette_tuples
 
 pixels = list(im.getdata())
 """
