@@ -83,6 +83,11 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
       * nano_bitmap_fullscreen.py - load and display bitmap image "fullscreen.bin", also see bitmap_fullscreen.py
       * nano_wifi_clock_timer.py - incomplete WIP nano version of wifi_clock_timer.py
       * nano_wifi_theme_clock.py - incomplete WIP - theme support https://github.com/clach04/cyd_clocks/issues/39
+
+            mpremote connect com5 mount .
+            import sys ; sys.path[2] = 'lib' ; import nano_wifi_theme_clock
+            # NOTE very slow (USB/serial) image/font transfer compared with local IO
+
       * image_converter.py - PIL/Pillow image converter for nano-GUI, only supports 4-bit and expects pallete to be setup already (alternative to img_cvt.py)
       * create_pallette_nano_4bit.py - PIL/Pillow 16 color (4-bit) pallete generater, saves a PNG file - see https://github.com/clach04/cyd_clocks/issues/40
       * nano_4bit_pallette.py - PIL/Pillow 16 color (4-bit) pallete definitions
