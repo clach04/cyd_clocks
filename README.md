@@ -53,7 +53,7 @@ either pass in `gamma=False` or modify driver with changes from https://github.c
 
 ## MicroPython Demos
 
-Recommend using Thonny or mpremote
+Recommend using [Thonny](https://github.com/thonny/thonny) or [mpremote](https://pypi.org/project/mpremote/) (`pip install mpremote`)
 
   * hw_info.py - Dump device information out to the serial port
 
