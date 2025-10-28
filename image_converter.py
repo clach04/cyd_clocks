@@ -1,9 +1,10 @@
 #! /usr/bin/env python3
-"""Given a palletized image, should be 320x240 4-bit (i.e. 16 colors)
+"""Given a palletized image, should (already) be 320x240 4-bit (i.e. 16 colors)
 
 Generate a raw image suitable for use with 4-bit driver in nano-GUI
 
 TODO 8-bit support (skipping nibble code)
+TODO move logic into https://github.com/clach04/image_convert
 """
 
 import sys
@@ -25,9 +26,13 @@ def mygetpalette(pal_type, orig_image_palette):
         palette.append( (r, g, b) )
     return palette
 
+argv = sys.argv
 
-out_filename = 'test_4bit.bin'
-in_path = "dpaint_sabers2_4bit_nano.gif"
+in_path = argv[1]
+try:
+    out_filename = argv[2]
+except IndexError:
+    out_filename = in_path + '.bin'
 
 im = Image.open(in_path)
 
@@ -60,6 +65,8 @@ indexed_palette = mygetpalette(pal_type,pal_data) ## must contain accurate palet
 print(indexed_palette)
 for entry in indexed_palette:
     print(entry)
+print('TODO review palette for accuracy')
+# For now, just assume this is correct
 
 pixels = list(im.getdata())
 """
