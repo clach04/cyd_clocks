@@ -44,11 +44,12 @@ except ImportError:
 def get_config(fn='clock.json'):  # TODO consider using https://github.com/Uthayamurthy/ConfigManager-Micropython (note it uses regexes...)
     # NOTE less memory if just try and open file and deal with errors
     try:
-        print('DEBUG open conf file %s' % (fn,))
+        print('DEBUG attempt open conf file %s' % (fn,))
         with open(fn) as f:
             c = json.load(f)
     except:
         # yeah, bare except, gulp :-(
+        print('DEBUG FAILED to open conf file %s' % (fn,))
         c = {}
     # dumb update/merge for defaults
     c['TZ'] = c.get('TZ', 'PST8PDT,M3.2.0/2:00:00,M11.1.0/2:00:00')
@@ -388,7 +389,7 @@ try:
     #refresh(ssd)
     """
 
-    theme_filename = "theme.json"
+    theme_filename = config.get('theme', 'theme.json')
     #if not os.path.exists(theme_filename):
     if not file_or_dir_exists(theme_filename):
         theme = {}
