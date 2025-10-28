@@ -30,13 +30,15 @@ def mygetpalette(pal_type, orig_image_palette):
 
 argv = sys.argv
 
-in_path = argv[1]
+in_filename = argv[1]
 try:
     out_filename = argv[2]
 except IndexError:
-    out_filename = in_path + '.bin'
+    out_filename = in_filename + '.bin'
 
-im = Image.open(in_path)
+print('Reading from: %s' % (in_filename,))
+
+im = Image.open(in_filename)
 
 width, height = im.size
 try:
@@ -93,3 +95,5 @@ while pixel_counter < len(pixels):
     fo.write(int.to_bytes((nibbles[0] << 4) | nibbles[1], 1, "big"))
 
 fo.close()
+
+print('Wrote to: %s' % (out_filename,))
