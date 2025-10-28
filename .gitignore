@@ -172,3 +172,6 @@ cython_debug/
 
 *.bak
 *~
+
+# esp32/cyd/micropython data/config files
+wifi.dat
