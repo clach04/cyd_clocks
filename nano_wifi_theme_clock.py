@@ -29,7 +29,7 @@ print('gc.mem_free %r - pre-collect' % (gc.mem_free(),))
 gc.collect()
 print('gc.mem_free %r - post-collect' % (gc.mem_free(),))
 try:
-    #raise ImportError  # DEBUG to save time and avoid problems, see comment at head
+    raise ImportError  # DEBUG to save time and avoid problems, see comment at head
     # NOTE this may fail due to lack of memory
     from microwifimanager.manager import WifiManager
 #except:
@@ -190,21 +190,27 @@ def display_clock(theme_config):
 
     if time_show:
         time_format = dumb_format_converter(theme_config["TIME"].get("FORMAT", "HH:mm:ss"))
-        color_str = theme_config["TIME"].get("FONT_COLOR", default_color_str)
-        if default_color_str == color_str:
-            time_color = fg_color
-        else:
-            r, g, b = str2rgb(color_str)
-            time_color = create_color(13, r, g, b)  # FIXME hard coded literal, replace with micropython constant
+        color_str = theme_config["TIME"].get("FONT_COLOR", default_color_str)  # TODO review default_color_str usage
+        if isinstance(color_str, int):
+            time_color = color_str  # i.e. index (from zero) palette number
+        else:  # assume a string in hex RGB
+            if default_color_str == color_str:
+                time_color = fg_color
+            else:
+                r, g, b = str2rgb(color_str)
+                time_color = create_color(13, r, g, b)  # FIXME hard coded literal, replace with micropython constant
 
     if date_show:
         date_format = dumb_format_converter(theme_config["DATE"].get("FORMAT", "YYYY-MM-dd"))
         color_str = theme_config["DATE"].get("FONT_COLOR", default_color_str)
-        if default_color_str == color_str:
-            date_color = fg_color
+        if isinstance(color_str, int):
+            date_color = color_str
         else:
-            r, g, b = str2rgb(color_str)
-            date_color = create_color(14, r, g, b)  # FIXME hard coded literal, replace with micropython constant
+            if default_color_str == color_str:
+                date_color = fg_color
+            else:
+                r, g, b = str2rgb(color_str)
+                date_color = create_color(14, r, g, b)  # FIXME hard coded literal, replace with micropython constant
 
     bg_color = WHITE
 
