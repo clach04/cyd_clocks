@@ -84,6 +84,8 @@ See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-qui
       * nano_wifi_clock_timer.py - incomplete WIP nano version of wifi_clock_timer.py
       * nano_wifi_theme_clock.py - incomplete WIP - theme support https://github.com/clach04/cyd_clocks/issues/39
       * image_converter.py - PIL/Pillow image converter for nano-GUI, only supports 4-bit and expects pallete to be setup already (alternative to img_cvt.py)
+      * create_pallette_nano_4bit.py - PIL/Pillow 16 color (4-bit) pallete generater, saves a PNG file - see https://github.com/clach04/cyd_clocks/issues/40
+      * nano_4bit_pallette.py - PIL/Pillow 16 color (4-bit) pallete definitions
 
 ili9341 driver
 
