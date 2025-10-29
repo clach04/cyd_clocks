@@ -93,7 +93,7 @@ def file_or_dir_exists(filename):
         return False
 
 def time2str(time_tuple, format_str="{YYYY:04d}-{MM:02d}-{dd:02d} {HH:02d}:{mm:02d}:{ss:02d}"):
-    year, month, mday, hour, minute, second, weekday, yearday = time_tuple  # micropython time.time()
+    year, month, mday, hour, minute, second, weekday, yearday = time_tuple  # micropython time.localtime()
     d = dict(
         YYYY=year,
         MM=month,
@@ -174,6 +174,7 @@ def display_clock(theme_config):
     font_name = font_name + str(font_size)
 
     try:
+        # Font created from font_to_py - https://github.com/peterhinch/micropython-font-to-py.git
         font = __import__(font_name, globals(), locals(), ['version',], 0)
     except ImportError:
         font = __import__('gui.fonts.' + font_name, globals(), locals(), ['version',], 0)
