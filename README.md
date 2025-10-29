@@ -67,7 +67,7 @@ Recommend using [Thonny](https://github.com/thonny/thonny) or [mpremote](https:/
 
 Nano GUI
 
-WARNING fonts should include; "0123456789:-"
+WARNING fonts should include; "0123456789 :-"
 
 See https://github.com/peterhinch/micropython-nano-gui?tab=readme-ov-file#13-quick-start for how to gets started (use mpremote and try a demo)
   * [color_setup.py](https://github.com/clach04/cyd_clocks/blob/main/color_setup.py) - TODO requires EDIT setup/config for using CYD1 and CYD2 with MicroPython Nano GUI https://github.com/peterhinch/micropython-nano-gui - see https://github.com/peterhinch/micropython-nano-gui/blob/master/setup_examples/ili9341_esp32_2432S028r.py
@@ -105,6 +105,7 @@ Simple install:
       mpremote connect com5 cp -r fullscreen_4bit.bin :
       mpremote connect com5 cp -r clock.json :
       mpremote connect com5 cp -r nano_wifi_theme_clock.py :
+      mpremote connect com5 cp -r posix_tz.py :
       mpremote connect com5 cp -r color_setup.py :
 
 
