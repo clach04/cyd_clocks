@@ -26,6 +26,7 @@ LCD has printed TPM408-2.8
 
   * https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/discussions/173
   * https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/
+  * https://github.com/Freenove/Freenove_ESP32_Display
 
 ## MicroPython
 
